@@ -18,7 +18,7 @@ public class Movie_Category {
     @JoinColumn(name = "movie_id")
     private Movie movie;
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "category")
+    @JoinColumn(name = "category_id")
     private Category category;
 
 }

@@ -1,9 +1,7 @@
 package com.springboot.architectural.controller;
 
-import com.springboot.architectural.dto.CategoryDTO;
 import com.springboot.architectural.dto.CountryDTO;
 import com.springboot.architectural.payload.ResponseData;
-import com.springboot.architectural.service.CategoryService;
 import com.springboot.architectural.service.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -50,7 +48,7 @@ public class CountryController {
         {
             responseData.setSuccess(false);
             responseData.setDesc("Update failed");
-            return new ResponseEntity<>(responseData, HttpStatus.OK);
+            return new ResponseEntity<>(responseData, HttpStatus.NOT_FOUND);
         }
         responseData.setData(countryService.update(countryDTO));
         responseData.setDesc("Update country successfully");
@@ -64,7 +62,7 @@ public class CountryController {
             responseData.setSuccess(false);
             responseData.setDesc("Delete failed");
 
-            return new ResponseEntity<>(responseData, HttpStatus.OK);
+            return new ResponseEntity<>(responseData, HttpStatus.NOT_FOUND);
         }
         responseData.setData(countryService.delete(id));
         responseData.setDesc("Delete country successfully");

@@ -18,7 +18,6 @@ public class Movie_UserDTO {
     private String email;
     private String avatar;
     private Integer money;
-
+    private Integer role_id;
     private Role role;
-
 }

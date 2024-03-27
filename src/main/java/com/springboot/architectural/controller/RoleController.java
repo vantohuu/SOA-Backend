@@ -40,7 +40,6 @@ public class RoleController {
     @PostMapping("/create")
     public ResponseEntity<?> createRole(@RequestBody RoleDTO role){
         ResponseData responseData = new ResponseData();
-//        System.out.println("CCCCC"  + role);
         responseData.setData(roleService.add(role));
         responseData.setDesc("Create Role successfully");
         return new ResponseEntity<>(responseData, HttpStatus.OK);
@@ -52,7 +51,7 @@ public class RoleController {
         {
             responseData.setSuccess(false);
             responseData.setDesc("Update failed");
-            return new ResponseEntity<>(responseData, HttpStatus.OK);
+            return new ResponseEntity<>(responseData, HttpStatus.NOT_FOUND);
         }
         responseData.setData(roleService.update(role));
         responseData.setDesc("Update role successfully");
@@ -66,7 +65,7 @@ public class RoleController {
             responseData.setSuccess(false);
             responseData.setDesc("Delete failed");
 
-            return new ResponseEntity<>(responseData, HttpStatus.OK);
+            return new ResponseEntity<>(responseData, HttpStatus.NOT_FOUND);
         }
         responseData.setData(roleService.delete(id));
         responseData.setDesc("Delete Role successfully");

@@ -1,41 +1,51 @@
 package com.springboot.architectural.mapper;
 
-import com.springboot.architectural.dto.RoleDTO;
-import com.springboot.architectural.entity.Role;
+import com.springboot.architectural.dto.Movie_UserDTO;
+import com.springboot.architectural.entity.Movie_User;
 import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-03-27T01:40:24+0700",
+    date = "2024-03-27T14:49:53+0700",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 17.0.10 (Amazon.com Inc.)"
 )
 public class MovieUserMapperImpl implements MovieUserMapper {
 
     @Override
-    public RoleDTO movieUserToMovieUserDto(Role role) {
-        if ( role == null ) {
+    public Movie_UserDTO movieUserToMovieUserDto(Movie_User movieUser) {
+        if ( movieUser == null ) {
             return null;
         }
 
-        RoleDTO roleDTO = new RoleDTO();
+        Movie_UserDTO movie_UserDTO = new Movie_UserDTO();
 
-        roleDTO.setRole_id( role.getRole_id() );
-        roleDTO.setName( role.getName() );
+        movie_UserDTO.setUsername( movieUser.getUsername() );
+        movie_UserDTO.setPassword( movieUser.getPassword() );
+        movie_UserDTO.setName( movieUser.getName() );
+        movie_UserDTO.setEmail( movieUser.getEmail() );
+        movie_UserDTO.setAvatar( movieUser.getAvatar() );
+        movie_UserDTO.setMoney( movieUser.getMoney() );
+        movie_UserDTO.setRole( movieUser.getRole() );
 
-        return roleDTO;
+        return movie_UserDTO;
     }
 
     @Override
-    public Role movieUserDtoToMovieUser(RoleDTO roleDto) {
-        if ( roleDto == null ) {
+    public Movie_User movieUserDtoToMovieUser(Movie_UserDTO movieUserDTO) {
+        if ( movieUserDTO == null ) {
             return null;
         }
 
-        Role role = new Role();
+        Movie_User movie_User = new Movie_User();
 
-        role.setRole_id( roleDto.getRole_id() );
-        role.setName( roleDto.getName() );
+        movie_User.setUsername( movieUserDTO.getUsername() );
+        movie_User.setPassword( movieUserDTO.getPassword() );
+        movie_User.setName( movieUserDTO.getName() );
+        movie_User.setEmail( movieUserDTO.getEmail() );
+        movie_User.setAvatar( movieUserDTO.getAvatar() );
+        movie_User.setMoney( movieUserDTO.getMoney() );
+        movie_User.setRole( movieUserDTO.getRole() );
 
-        return role;
+        return movie_User;
     }
 }

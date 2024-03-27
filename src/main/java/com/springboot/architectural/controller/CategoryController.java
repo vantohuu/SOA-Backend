@@ -50,7 +50,7 @@ public class CategoryController {
         {
             responseData.setSuccess(false);
             responseData.setDesc("Update failed");
-            return new ResponseEntity<>(responseData, HttpStatus.OK);
+            return new ResponseEntity<>(responseData, HttpStatus.NOT_FOUND);
         }
         responseData.setData(categoryService.update(categoryDTO));
         responseData.setDesc("Update category successfully");
@@ -64,7 +64,7 @@ public class CategoryController {
             responseData.setSuccess(false);
             responseData.setDesc("Delete failed");
 
-            return new ResponseEntity<>(responseData, HttpStatus.OK);
+            return new ResponseEntity<>(responseData, HttpStatus.NOT_FOUND);
         }
         responseData.setData(categoryService.delete(id));
         responseData.setDesc("Delete category successfully");
