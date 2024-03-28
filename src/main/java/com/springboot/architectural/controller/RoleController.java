@@ -23,11 +23,11 @@ public class RoleController {
         {
             responseData.setSuccess(false);
             responseData.setDesc("Not Found Role By ID");
-            return new ResponseEntity<>(responseData, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(responseData.getData(), HttpStatus.NOT_FOUND);
         }
         responseData.setData(roleService.getById(id));
         responseData.setDesc("Get Role successfully");
-        return new ResponseEntity<>(responseData, HttpStatus.OK);
+        return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
 
     @GetMapping("/get-all-role")
@@ -35,14 +35,14 @@ public class RoleController {
         ResponseData responseData = new ResponseData();
         responseData.setData(roleService.getAll());
         responseData.setDesc("Get all successfully");
-        return new ResponseEntity<>(responseData, HttpStatus.OK);
+        return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
     @PostMapping("/create")
     public ResponseEntity<?> createRole(@RequestBody RoleDTO role){
         ResponseData responseData = new ResponseData();
         responseData.setData(roleService.add(role));
         responseData.setDesc("Create Role successfully");
-        return new ResponseEntity<>(responseData, HttpStatus.OK);
+        return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
     @PutMapping("/update")
     public ResponseEntity<?> updateRole(@RequestBody RoleDTO role){
@@ -51,11 +51,11 @@ public class RoleController {
         {
             responseData.setSuccess(false);
             responseData.setDesc("Update failed");
-            return new ResponseEntity<>(responseData, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(responseData.getData(), HttpStatus.NOT_FOUND);
         }
         responseData.setData(roleService.update(role));
         responseData.setDesc("Update role successfully");
-        return new ResponseEntity<>(responseData, HttpStatus.OK);
+        return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
     @DeleteMapping("/delete")
     public ResponseEntity<?> deleteRole(@RequestParam Integer id){
@@ -65,11 +65,11 @@ public class RoleController {
             responseData.setSuccess(false);
             responseData.setDesc("Delete failed");
 
-            return new ResponseEntity<>(responseData, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(responseData.getData(), HttpStatus.NOT_FOUND);
         }
         responseData.setData(roleService.delete(id));
         responseData.setDesc("Delete Role successfully");
-        return new ResponseEntity<>(responseData, HttpStatus.OK);
+        return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
 
 }

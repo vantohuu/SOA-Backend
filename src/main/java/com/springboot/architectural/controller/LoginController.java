@@ -21,7 +21,7 @@ public class LoginController {
     public ResponseEntity<?> signup(@RequestBody SignUpRequest signUpRequest){
         ResponseData responseData = new ResponseData();
         responseData.setData(loginService.addUser(signUpRequest));
-        return new ResponseEntity<>(responseData, HttpStatus.OK);
+        return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
 
     @PostMapping("/signin")
@@ -37,6 +37,6 @@ public class LoginController {
             responseData.setSuccess(false);
         }
 
-        return new ResponseEntity<>(responseData, HttpStatus.OK);
+        return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
 }

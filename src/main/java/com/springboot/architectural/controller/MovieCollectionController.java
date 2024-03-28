@@ -26,11 +26,11 @@ public class MovieCollectionController {
         {
             responseData.setSuccess(false);
             responseData.setDesc("Not Found By ID");
-            return new ResponseEntity<>(responseData, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(responseData.getData(), HttpStatus.NOT_FOUND);
         }
         responseData.setData(movieCollectionService.getById(id));
         responseData.setDesc("Get successfully");
-        return new ResponseEntity<>(responseData, HttpStatus.OK);
+        return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
 
     @GetMapping("/get-all")
@@ -38,7 +38,7 @@ public class MovieCollectionController {
         ResponseData responseData = new ResponseData();
         responseData.setData(movieCollectionService.getAll());
         responseData.setDesc("Get all successfully");
-        return new ResponseEntity<>(responseData, HttpStatus.OK);
+        return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody Movie_CollectionDTO movieCollectionDTO){
@@ -53,7 +53,7 @@ public class MovieCollectionController {
 
             responseData.setSuccess(false);
         }
-        return new ResponseEntity<>(responseData, HttpStatus.OK);
+        return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
     @PutMapping("/update")
     public ResponseEntity<?> update(@RequestBody Movie_CollectionDTO movieCollectionDTO){
@@ -64,11 +64,11 @@ public class MovieCollectionController {
         {
             responseData.setSuccess(false);
             responseData.setDesc("Update failed");
-            return new ResponseEntity<>(responseData, HttpStatus.OK);
+            return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
         }
         responseData.setData(movieCollectionService.update(movieCollectionDTO));
         responseData.setDesc("Update successfully");
-        return new ResponseEntity<>(responseData, HttpStatus.OK);
+        return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
     @DeleteMapping("/delete")
     public ResponseEntity<?> deleteRoom(@RequestParam String username){
@@ -78,11 +78,11 @@ public class MovieCollectionController {
             responseData.setSuccess(false);
             responseData.setDesc("Delete failed");
 
-            return new ResponseEntity<>(responseData, HttpStatus.OK);
+            return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
         }
         responseData.setData(movieCollectionService.delete(username));
         responseData.setDesc("Delete successfully");
 
-        return new ResponseEntity<>(responseData, HttpStatus.OK);
+        return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
 }

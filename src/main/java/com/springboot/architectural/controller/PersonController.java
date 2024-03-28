@@ -24,12 +24,12 @@ public class PersonController {
         {
             responseData.setSuccess(false);
             responseData.setDesc("Not Found person By ID");
-            return new ResponseEntity<>(responseData, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(responseData.getData(), HttpStatus.NOT_FOUND);
         }
         responseData.setData(personService.getById(id));
         responseData.setDesc("Get person successfully");
 
-        return new ResponseEntity<>(responseData, HttpStatus.OK);
+        return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
 
     @GetMapping("/get-all")
@@ -38,14 +38,14 @@ public class PersonController {
                                         @RequestParam(defaultValue = "") String searchContent){
         ResponseData responseData = new ResponseData();
         responseData.setData(personService.getAll(searchContent, sortField, typeSort));
-        return new ResponseEntity<>(responseData, HttpStatus.OK);
+        return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
     @PostMapping("/create")
     public ResponseEntity<?> createRoom(@RequestBody PersonDTO person){
         ResponseData responseData = new ResponseData();
         responseData.setData(personService.add(person));
         responseData.setDesc("Create person successfully");
-        return new ResponseEntity<>(responseData, HttpStatus.OK);
+        return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
     @PutMapping("/update")
     public ResponseEntity<?> updateRoom(@RequestBody PersonDTO person){
@@ -54,11 +54,11 @@ public class PersonController {
         {
             responseData.setSuccess(false);
             responseData.setDesc("Update failed");
-            return new ResponseEntity<>(responseData, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(responseData.getData(), HttpStatus.NOT_FOUND);
         }
         responseData.setData(personService.update(person));
         responseData.setDesc("Update person successfully");
-        return new ResponseEntity<>(responseData, HttpStatus.OK);
+        return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
     @DeleteMapping("/delete")
     public ResponseEntity<?> deleteRoom(@RequestParam int id){
@@ -68,12 +68,12 @@ public class PersonController {
             responseData.setSuccess(false);
             responseData.setDesc("Delete failed");
 
-            return new ResponseEntity<>(responseData, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(responseData.getData(), HttpStatus.NOT_FOUND);
         }
         responseData.setData(personService.delete(id));
         responseData.setDesc("Delete person successfully");
 
-        return new ResponseEntity<>(responseData, HttpStatus.OK);
+        return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
 
     @PostMapping("/upload")
@@ -89,7 +89,7 @@ public class PersonController {
             responseData.setData(false);
             responseData.setDesc("Upload failed");
         }
-        return new ResponseEntity<>(responseData, HttpStatus.OK);
+        return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
 
 

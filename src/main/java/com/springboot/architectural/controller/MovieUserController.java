@@ -22,12 +22,12 @@ public class MovieUserController {
         {
             responseData.setSuccess(false);
             responseData.setDesc("Not Found MovieUser By ID");
-            return new ResponseEntity<>(responseData, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(responseData.getData(), HttpStatus.NOT_FOUND);
         }
         responseData.setData(movieUserService.getById(id));
         responseData.setDesc("Get movieUser successfully");
 
-        return new ResponseEntity<>(responseData, HttpStatus.OK);
+        return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
 
     @GetMapping("/get-all")
@@ -36,14 +36,14 @@ public class MovieUserController {
                                         @RequestParam(defaultValue = "") String searchContent){
         ResponseData responseData = new ResponseData();
         responseData.setData(movieUserService.getAll(searchContent, sortField, typeSort));
-        return new ResponseEntity<>(responseData, HttpStatus.OK);
+        return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
     @PostMapping("/create")
     public ResponseEntity<?> createRoom(@RequestBody Movie_UserDTO movieUserDTO){
         ResponseData responseData = new ResponseData();
         responseData.setData(movieUserService.add(movieUserDTO));
         responseData.setDesc("Create movieUser successfully");
-        return new ResponseEntity<>(responseData, HttpStatus.OK);
+        return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
     @PutMapping("/update")
     public ResponseEntity<?> updateRoom(@RequestBody Movie_UserDTO movieUserDTO){
@@ -52,11 +52,11 @@ public class MovieUserController {
         {
             responseData.setSuccess(false);
             responseData.setDesc("Update failed");
-            return new ResponseEntity<>(responseData, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(responseData.getData(), HttpStatus.NOT_FOUND);
         }
         responseData.setData(movieUserService.update(movieUserDTO));
         responseData.setDesc("Update movie successfully");
-        return new ResponseEntity<>(responseData, HttpStatus.OK);
+        return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
     @DeleteMapping("/delete")
     public ResponseEntity<?> deleteRoom(@RequestParam String username){
@@ -66,12 +66,12 @@ public class MovieUserController {
             responseData.setSuccess(false);
             responseData.setDesc("Delete failed");
 
-            return new ResponseEntity<>(responseData, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(responseData.getData(), HttpStatus.NOT_FOUND);
         }
         responseData.setData(movieUserService.delete(username));
         responseData.setDesc("Delete room successfully");
 
-        return new ResponseEntity<>(responseData, HttpStatus.OK);
+        return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
 
     @PostMapping("/upload")
@@ -87,7 +87,7 @@ public class MovieUserController {
             responseData.setData(false);
             responseData.setDesc("Upload failed");
         }
-        return new ResponseEntity<>(responseData, HttpStatus.OK);
+        return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
 
 
