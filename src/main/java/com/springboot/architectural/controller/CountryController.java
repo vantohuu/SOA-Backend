@@ -20,11 +20,11 @@ public class CountryController {
         {
             responseData.setSuccess(false);
             responseData.setDesc("Not found country By ID");
-            return new ResponseEntity<>(responseData, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(responseData.getData(), HttpStatus.NOT_FOUND);
         }
         responseData.setData(countryService.getById(id));
         responseData.setDesc("Get country successfully");
-        return new ResponseEntity<>(responseData, HttpStatus.OK);
+        return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
 
     @GetMapping("/get-all")
@@ -32,14 +32,14 @@ public class CountryController {
         ResponseData responseData = new ResponseData();
         responseData.setData(countryService.getAll());
         responseData.setDesc("Get all successfully");
-        return new ResponseEntity<>(responseData, HttpStatus.OK);
+        return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody CountryDTO countryDTO){
         ResponseData responseData = new ResponseData();
         responseData.setData(countryService.add(countryDTO));
         responseData.setDesc("Create country successfully");
-        return new ResponseEntity<>(responseData, HttpStatus.OK);
+        return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
     @PutMapping("/update")
     public ResponseEntity<?> update(@RequestBody CountryDTO countryDTO){
@@ -48,11 +48,11 @@ public class CountryController {
         {
             responseData.setSuccess(false);
             responseData.setDesc("Update failed");
-            return new ResponseEntity<>(responseData, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(responseData.getData(), HttpStatus.NOT_FOUND);
         }
         responseData.setData(countryService.update(countryDTO));
         responseData.setDesc("Update country successfully");
-        return new ResponseEntity<>(responseData, HttpStatus.OK);
+        return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
     @DeleteMapping("/delete")
     public ResponseEntity<?> delete(@RequestParam Integer id){
@@ -62,11 +62,11 @@ public class CountryController {
             responseData.setSuccess(false);
             responseData.setDesc("Delete failed");
 
-            return new ResponseEntity<>(responseData, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(responseData.getData(), HttpStatus.NOT_FOUND);
         }
         responseData.setData(countryService.delete(id));
         responseData.setDesc("Delete country successfully");
-        return new ResponseEntity<>(responseData, HttpStatus.OK);
+        return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
 
 

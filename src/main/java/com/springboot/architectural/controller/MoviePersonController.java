@@ -21,11 +21,11 @@ public class MoviePersonController {
         {
             responseData.setSuccess(false);
             responseData.setDesc("Not Found By ID");
-            return new ResponseEntity<>(responseData, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(responseData.getData(), HttpStatus.NOT_FOUND);
         }
         responseData.setData(moviePersonService.getById(id));
         responseData.setDesc("Get successfully");
-        return new ResponseEntity<>(responseData, HttpStatus.OK);
+        return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
 
     @GetMapping("/get-all")
@@ -33,7 +33,7 @@ public class MoviePersonController {
         ResponseData responseData = new ResponseData();
         responseData.setData(moviePersonService.getAll());
         responseData.setDesc("Get all successfully");
-        return new ResponseEntity<>(responseData, HttpStatus.OK);
+        return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody Movie_PersonDTO moviePersonDTO){
@@ -48,7 +48,7 @@ public class MoviePersonController {
 
             responseData.setSuccess(false);
         }
-        return new ResponseEntity<>(responseData, HttpStatus.OK);
+        return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
     @PutMapping("/update")
     public ResponseEntity<?> update(@RequestBody Movie_PersonDTO moviePersonDTO){
@@ -59,11 +59,11 @@ public class MoviePersonController {
         {
             responseData.setSuccess(false);
             responseData.setDesc("Update failed");
-            return new ResponseEntity<>(responseData, HttpStatus.OK);
+            return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
         }
         responseData.setData(moviePersonService.update(moviePersonDTO));
         responseData.setDesc("Update successfully");
-        return new ResponseEntity<>(responseData, HttpStatus.OK);
+        return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
     @DeleteMapping("/delete")
     public ResponseEntity<?> deleteRoom(@RequestParam int id){
@@ -73,11 +73,11 @@ public class MoviePersonController {
             responseData.setSuccess(false);
             responseData.setDesc("Delete failed");
 
-            return new ResponseEntity<>(responseData, HttpStatus.OK);
+            return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
         }
         responseData.setData(moviePersonService.delete(id));
         responseData.setDesc("Delete successfully");
 
-        return new ResponseEntity<>(responseData, HttpStatus.OK);
+        return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
 }

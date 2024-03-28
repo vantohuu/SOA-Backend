@@ -22,7 +22,7 @@ public class MovieController {
         {
             responseData.setSuccess(false);
             responseData.setDesc("Not Found Movie By ID");
-            return new ResponseEntity<>(responseData, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(responseData.getData(), HttpStatus.NOT_FOUND);
         }
         responseData.setData(movieService.getById(id));
         responseData.setDesc("Get movie successfully");
@@ -52,7 +52,7 @@ public class MovieController {
         {
             responseData.setSuccess(false);
             responseData.setDesc("Update failed");
-            return new ResponseEntity<>(responseData, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(responseData.getData(), HttpStatus.NOT_FOUND);
         }
         responseData.setData(movieService.update(movie));
         responseData.setDesc("Update movie successfully");
