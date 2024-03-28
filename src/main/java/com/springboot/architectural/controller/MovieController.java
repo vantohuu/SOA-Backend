@@ -38,6 +38,15 @@ public class MovieController {
         responseData.setData(movieService.getAll(searchContent, sortField, typeSort));
         return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
+    @GetMapping("/get-all-by-category")
+    public ResponseEntity<?> getAll(@RequestParam(defaultValue = "") String sortField,
+                                    @RequestParam(defaultValue = "DESC") String typeSort,
+                                    @RequestParam(defaultValue = "") String searchContent,
+                                    @RequestParam(defaultValue = "") Integer category_id){
+        ResponseData responseData = new ResponseData();
+        responseData.setData(movieService.getAllByCategory(searchContent, sortField, typeSort,category_id));
+        return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
+    }
     @PostMapping("/create")
     public ResponseEntity<?> createRoom(@RequestBody MovieDTO movie){
         ResponseData responseData = new ResponseData();

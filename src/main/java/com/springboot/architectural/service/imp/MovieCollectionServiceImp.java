@@ -3,10 +3,8 @@ package com.springboot.architectural.service.imp;
 import com.springboot.architectural.dto.Movie_CollectionDTO;
 import com.springboot.architectural.entity.*;
 import com.springboot.architectural.mapper.MovieCollectionMapper;
-import com.springboot.architectural.mapper.MoviePersonMapper;
 import com.springboot.architectural.repository.*;
 import com.springboot.architectural.service.MovieCollectionService;
-import com.springboot.architectural.service.MoviePersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +19,7 @@ public class MovieCollectionServiceImp implements MovieCollectionService {
     @Autowired
     private MovieRepository movieRepository;
     @Autowired
-    private Movie_UserRepository movieUserRepository;
+    private MovieUserRepository movieUserRepository;
 
     @Override
     public Movie_CollectionDTO getById(String id) {

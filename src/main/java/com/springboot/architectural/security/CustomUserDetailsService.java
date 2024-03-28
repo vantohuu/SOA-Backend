@@ -1,6 +1,6 @@
 package com.springboot.architectural.security;
 import com.springboot.architectural.entity.Movie_User;
-import com.springboot.architectural.repository.Movie_UserRepository;
+import com.springboot.architectural.repository.MovieUserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -11,13 +11,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service()
 public class CustomUserDetailsService implements UserDetailsService {
-    private Movie_UserRepository movieUserRepository;
+    private MovieUserRepository movieUserRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

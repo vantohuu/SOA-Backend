@@ -1,12 +1,13 @@
 package com.springboot.architectural.mapper;
 
 import com.springboot.architectural.dto.PersonDTO;
+import com.springboot.architectural.entity.Country;
 import com.springboot.architectural.entity.Person;
 import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-03-27T17:32:09+0700",
+    date = "2024-03-28T20:27:22+0700",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 17.0.10 (Amazon.com Inc.)"
 )
 public class PersonMapperImpl implements PersonMapper {
@@ -19,7 +20,7 @@ public class PersonMapperImpl implements PersonMapper {
 
         PersonDTO personDTO = new PersonDTO();
 
-        personDTO.setPerson_id( person.getPerson_id() );
+        personDTO.setPerson_id( personCountryCountry_id( person ) );
         personDTO.setName( person.getName() );
         personDTO.setGender( person.getGender() );
         personDTO.setDay_of_birth( person.getDay_of_birth() );
@@ -47,5 +48,20 @@ public class PersonMapperImpl implements PersonMapper {
         person.setCountry( personDTO.getCountry() );
 
         return person;
+    }
+
+    private Integer personCountryCountry_id(Person person) {
+        if ( person == null ) {
+            return null;
+        }
+        Country country = person.getCountry();
+        if ( country == null ) {
+            return null;
+        }
+        Integer country_id = country.getCountry_id();
+        if ( country_id == null ) {
+            return null;
+        }
+        return country_id;
     }
 }

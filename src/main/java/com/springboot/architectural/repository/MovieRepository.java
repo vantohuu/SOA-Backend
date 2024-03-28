@@ -12,4 +12,9 @@ import java.util.List;
 public interface MovieRepository extends JpaRepository<Movie, Integer> {
     @Query("SELECT r FROM Movie r WHERE CONCAT(r.id, ' ', r.name) LIKE %?1%")
     public List<Movie> findAllFilter(String searchContent, Sort pageable);
+
+    @Query("SELECT movie FROM Movie movie " +
+            "join movie.categories categories \n" +
+            "WHERE CONCAT(movie.id, ' ', movie.name) LIKE %?1% and categories.category_id = ?2 ")
+    public List<Movie> findAllFilterByCategory(String searchContent, Integer category_id, Sort pageable);
 }

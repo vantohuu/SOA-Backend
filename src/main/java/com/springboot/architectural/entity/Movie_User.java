@@ -22,9 +22,7 @@ public class Movie_User {
     private String email;
     private String avatar;
     private Integer money;
-
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
-
 }

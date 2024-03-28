@@ -1,19 +1,13 @@
 package com.springboot.architectural.service.imp;
 
-import com.springboot.architectural.dto.MovieDTO;
 import com.springboot.architectural.dto.Movie_UserDTO;
-import com.springboot.architectural.entity.Country;
-import com.springboot.architectural.entity.Movie;
 import com.springboot.architectural.entity.Movie_User;
 import com.springboot.architectural.entity.Role;
-import com.springboot.architectural.mapper.MovieMapper;
 import com.springboot.architectural.mapper.MovieUserMapper;
-import com.springboot.architectural.repository.CountryRepository;
-import com.springboot.architectural.repository.MovieRepository;
-import com.springboot.architectural.repository.Movie_UserRepository;
+import com.springboot.architectural.repository.MovieUserRepository;
 import com.springboot.architectural.repository.RoleRepository;
 import com.springboot.architectural.service.FileService;
-import com.springboot.architectural.service.Movie_UserService;
+import com.springboot.architectural.service.MovieUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Sort;
@@ -25,11 +19,11 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class MovieUserServiceImp implements Movie_UserService {
+public class MovieUserServiceImp implements MovieUserService {
     @Value("${fileUpload.rootPatch}")
     private String rootPatch;
     @Autowired
-    private Movie_UserRepository movieUserRepository;
+    private MovieUserRepository movieUserRepository;
     @Autowired
     private RoleRepository roleRepository;
     @Autowired

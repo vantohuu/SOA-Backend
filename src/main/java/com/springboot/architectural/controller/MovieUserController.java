@@ -1,10 +1,8 @@
 package com.springboot.architectural.controller;
 
-import com.springboot.architectural.dto.MovieDTO;
 import com.springboot.architectural.dto.Movie_UserDTO;
 import com.springboot.architectural.payload.ResponseData;
-import com.springboot.architectural.service.MovieService;
-import com.springboot.architectural.service.Movie_UserService;
+import com.springboot.architectural.service.MovieUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class MovieUserController {
     @Autowired
-    Movie_UserService movieUserService;
+    MovieUserService movieUserService;
     @GetMapping("/{id}")
     public ResponseEntity<?> getRoom(@PathVariable(name = "id") String id){
         ResponseData responseData = new ResponseData();

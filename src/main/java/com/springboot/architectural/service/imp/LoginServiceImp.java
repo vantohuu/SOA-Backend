@@ -2,10 +2,9 @@ package com.springboot.architectural.service.imp;
 
 import com.springboot.architectural.dto.RoleDTO;
 import com.springboot.architectural.entity.Movie_User;
-import com.springboot.architectural.entity.Role;
 import com.springboot.architectural.mapper.RoleMapper;
 import com.springboot.architectural.payload.Request.SignUpRequest;
-import com.springboot.architectural.repository.Movie_UserRepository;
+import com.springboot.architectural.repository.MovieUserRepository;
 import com.springboot.architectural.security.JwtTokenProvider;
 import com.springboot.architectural.service.LoginService;
 import com.springboot.architectural.service.RoleService;
@@ -17,14 +16,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class LoginServiceImp implements LoginService {
     @Autowired
-    private Movie_UserRepository movieUserRepository;
+    private MovieUserRepository movieUserRepository;
     @Autowired
     private RoleService roleService;
 
