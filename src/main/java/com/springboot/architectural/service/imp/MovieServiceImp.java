@@ -38,7 +38,7 @@ public class MovieServiceImp implements MovieService {
 
     @Override
     public List<MovieDTO> getAll(String searchContent,String sortField , String typeSort) {
-        Sort sorted = Sort.by(sortField.isEmpty() ? "movie_id" : sortField );
+        Sort sorted = Sort.by(sortField.isEmpty() ? "movieId" : sortField );
         sorted = typeSort.toUpperCase(Locale.ROOT).equals("DESC") ? sorted.descending() : sorted.ascending();
         List<Movie> movies =  movieRepository.findAllFilter(searchContent, sorted);;
         return movies.stream().map(MovieMapper.INSTANCE::movieToMovieDto).collect(Collectors.toList());
@@ -46,7 +46,7 @@ public class MovieServiceImp implements MovieService {
 
     @Override
     public List<MovieDTO> getAllByCategory(String searchContent, String sortField, String typeSort, Integer category_id) {
-        Sort sorted = Sort.by(sortField.isEmpty() ? "movie_id" : sortField );
+        Sort sorted = Sort.by(sortField.isEmpty() ? "movieId" : sortField );
         sorted = typeSort.toUpperCase(Locale.ROOT).equals("DESC") ? sorted.descending() : sorted.ascending();
         List<Movie> movies =  movieRepository.findAllFilterByCategory(searchContent,category_id, sorted);;
         return movies.stream().map(MovieMapper.INSTANCE::movieToMovieDto).collect(Collectors.toList());
