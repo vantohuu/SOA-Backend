@@ -38,9 +38,9 @@ public class MoviePersonServiceImp implements MoviePersonService {
     @Override
     public Movie_PersonDTO add(Movie_PersonDTO moviePersonDTO) {
         Movie_Person entity = MoviePersonMapper.INSTANCE.moviePersonDtoToMoviePerson(moviePersonDTO);
-        if (moviePersonDTO.getMovie_id() == null || moviePersonDTO.getPerson_id() == null  ) return null;
-        Optional<Movie> movie = movieRepository.findById(moviePersonDTO.getMovie_id());
-        Optional<Person> person = personRepository.findById(moviePersonDTO.getPerson_id());
+        if (moviePersonDTO.getMovieId() == null || moviePersonDTO.getPersonId() == null  ) return null;
+        Optional<Movie> movie = movieRepository.findById(moviePersonDTO.getMovieId());
+        Optional<Person> person = personRepository.findById(moviePersonDTO.getPersonId());
         if (movie.isEmpty() || person.isEmpty()) return null;
         entity.setPerson(person.get());
         entity.setMovie(movie.get());
@@ -53,9 +53,9 @@ public class MoviePersonServiceImp implements MoviePersonService {
         if (moviePersonDTO.getId() == null) return null;
         Optional<Movie_Person> checkRR = moviePersonRepository.findById(moviePersonDTO.getId());
         if (checkRR.isEmpty()) return  null;
-        if (moviePersonDTO.getMovie_id() == null || moviePersonDTO.getPerson_id() == null  ) return null;
-        Optional<Movie> movie = movieRepository.findById(moviePersonDTO.getMovie_id());
-        Optional<Person> person = personRepository.findById(moviePersonDTO.getPerson_id());
+        if (moviePersonDTO.getMovieId() == null || moviePersonDTO.getPersonId() == null  ) return null;
+        Optional<Movie> movie = movieRepository.findById(moviePersonDTO.getMovieId());
+        Optional<Person> person = personRepository.findById(moviePersonDTO.getPersonId());
         if (movie.isEmpty() || person.isEmpty()) return null;
         Movie_Person entity = MoviePersonMapper.INSTANCE.moviePersonDtoToMoviePerson(moviePersonDTO);
         entity.setMovie(movie.get());

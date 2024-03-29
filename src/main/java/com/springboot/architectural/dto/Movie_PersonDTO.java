@@ -12,8 +12,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Movie_PersonDTO {
     private Integer id;
-    private Integer movie_id;
-    private Integer person_id;
+    private Integer movieId;
+    private Integer personId;
     private Movie movie;
     private Person person;
 }

@@ -15,7 +15,8 @@ import java.sql.Date;
 public class Movie_Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_comment;
+    @Column(name = "id_comment")
+    private Integer idComment;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "movie_id")
     private Movie movie;

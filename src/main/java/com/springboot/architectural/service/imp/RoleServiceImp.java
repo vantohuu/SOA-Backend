@@ -38,7 +38,7 @@ public class RoleServiceImp implements RoleService {
 
     @Override
     public RoleDTO update(RoleDTO role) {
-        Optional<Role> checkRR = roleRepository.findById(role.getRole_id());
+        Optional<Role> checkRR = roleRepository.findById(role.getRoleId());
         if (checkRR.isEmpty()) return null;
         Role roomRegisEntity = RoleMapper.INSTANCE.roleDtoToRole(role);
         return  RoleMapper.INSTANCE.roleToRoleDto(roleRepository.save(roomRegisEntity));

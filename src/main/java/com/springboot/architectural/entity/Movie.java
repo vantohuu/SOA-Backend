@@ -17,14 +17,17 @@ import java.util.Set;
 public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer movie_id;
+    @Column(name = "movie_id")
+    private Integer movieId;
     private String name;
-    private String movie_content;
+    @Column(name = "movieContent")
+    private String movieContent;
     private Integer episodes;
-    private Integer movie_schedule;
+    @Column(name = "movie_schedule")
+    private Integer movieSchedule;
     private String image;
     @ManyToOne
-    @JoinColumn(name = "country_id")
+    @JoinColumn(name = "countryId")
     private Country country;
     private  float star;
     private Integer price;

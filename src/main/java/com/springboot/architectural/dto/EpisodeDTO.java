@@ -11,11 +11,11 @@ import java.sql.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EpisodeDTO {
-    private Integer episode_id;
+    private Integer episodeId;
     private String name;
     private Integer episode;
     private String season;
     private String link;
-    private Date day_submit;
-    private Integer movie_id;
+    private Date daySubmit;
+    private Integer movieId;
 }

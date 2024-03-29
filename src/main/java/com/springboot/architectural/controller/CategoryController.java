@@ -46,7 +46,7 @@ public class CategoryController {
     @PutMapping("/update")
     public ResponseEntity<?> update(@RequestBody CategoryDTO categoryDTO){
         ResponseData responseData = new ResponseData();
-        if (categoryService.getById(categoryDTO.getCategory_id()) == null)
+        if (categoryService.getById(categoryDTO.getCategoryId()) == null)
         {
             responseData.setSuccess(false);
             responseData.setDesc("Update failed");

@@ -9,7 +9,7 @@ import org.mapstruct.factory.Mappers;
 @Mapper
 public interface MovieMapper {
     MovieMapper INSTANCE = Mappers.getMapper(MovieMapper.class );
-    @Mapping(target = "country_id", source = "movie.country.country_id")
+    @Mapping(target = "countryId", source = "movie.country.countryId")
     MovieDTO movieToMovieDto(Movie movie);
     Movie movieDtoToMovie(MovieDTO movieDTO);
 }

@@ -12,12 +12,12 @@ import java.sql.Date;
 @NoArgsConstructor
 @ToString
 public class PersonDTO {
-    private Integer person_id;
+    private Integer personId;
     private String name;
     private Integer gender;
-    private Date day_of_birth;
+    private Date dayOfBirth;
     private String image;
     private String describe;
-    private Integer country_id;
+    private Integer countryId;
     private Country country;
 }

@@ -40,9 +40,9 @@ public class MovieCategoryServiceImp implements MovieCategoryService {
     @Override
     public Movie_CategoryDTO add(Movie_CategoryDTO movieCategoryDTO) {
         Movie_Category entity = MovieCategoryMapper.INSTANCE.movieCategoryDtoToMovieCategory(movieCategoryDTO);
-        if (movieCategoryDTO.getMovie_id() == null || movieCategoryDTO.getCategory_id() == null  ) return null;
-        Optional<Movie> movie = movieRepository.findById(movieCategoryDTO.getMovie_id());
-        Optional<Category> category = categoryRepository.findById(movieCategoryDTO.getCategory_id());
+        if (movieCategoryDTO.getMovieId() == null || movieCategoryDTO.getCategoryId() == null  ) return null;
+        Optional<Movie> movie = movieRepository.findById(movieCategoryDTO.getMovieId());
+        Optional<Category> category = categoryRepository.findById(movieCategoryDTO.getCategoryId());
         if (movie.isEmpty() || category.isEmpty()) return null;
         entity.setCategory(category.get());
         entity.setMovie(movie.get());
@@ -55,9 +55,9 @@ public class MovieCategoryServiceImp implements MovieCategoryService {
         if (movieCategoryDTO.getId() == null) return null;
         Optional<Movie_Category> checkRR = movieCategoryRepository.findById(movieCategoryDTO.getId());
         if (checkRR.isEmpty()) return  null;
-        if (movieCategoryDTO.getMovie_id() == null || movieCategoryDTO.getCategory_id() == null  ) return null;
-        Optional<Movie> movie = movieRepository.findById(movieCategoryDTO.getMovie_id());
-        Optional<Category> category = categoryRepository.findById(movieCategoryDTO.getCategory_id());
+        if (movieCategoryDTO.getMovieId() == null || movieCategoryDTO.getCategoryId() == null  ) return null;
+        Optional<Movie> movie = movieRepository.findById(movieCategoryDTO.getMovieId());
+        Optional<Category> category = categoryRepository.findById(movieCategoryDTO.getCategoryId());
         if (movie.isEmpty() || category.isEmpty()) return null;
         Movie_Category entity = MovieCategoryMapper.INSTANCE.movieCategoryDtoToMovieCategory(movieCategoryDTO);
         entity.setMovie(movie.get());

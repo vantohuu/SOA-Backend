@@ -50,7 +50,7 @@ public class PersonController {
     @PutMapping("/update")
     public ResponseEntity<?> updateRoom(@RequestBody PersonDTO person){
         ResponseData responseData = new ResponseData();
-        if (personService.getById(person.getPerson_id()) == null)
+        if (personService.getById(person.getPersonId()) == null)
         {
             responseData.setSuccess(false);
             responseData.setDesc("Update failed");

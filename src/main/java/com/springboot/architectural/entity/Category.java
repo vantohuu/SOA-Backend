@@ -17,6 +17,7 @@ import java.sql.Date;
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer category_id;
+    @Column(name = "category_id")
+    private Integer categoryId;
     private String name;
 }

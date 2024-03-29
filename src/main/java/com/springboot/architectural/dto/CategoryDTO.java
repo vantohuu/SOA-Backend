@@ -11,7 +11,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class CategoryDTO {
-    private Integer category_id;
+    private Integer categoryId;
     private String name;
 
 }

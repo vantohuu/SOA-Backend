@@ -17,11 +17,12 @@ import java.sql.Date;
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    private Integer person_id;
+    @Column(name = "person_id")
+    private Integer personId;
     private String name;
     private Integer gender;
-    private Date day_of_birth;
+    @Column(name = "day_of_birth")
+    private Date dayOfBirth;
     private String image;
     private String describe;
     @ManyToOne

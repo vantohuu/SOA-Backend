@@ -44,7 +44,7 @@ public class CountryController {
     @PutMapping("/update")
     public ResponseEntity<?> update(@RequestBody CountryDTO countryDTO){
         ResponseData responseData = new ResponseData();
-        if (countryService.getById(countryDTO.getCountry_id()) == null)
+        if (countryService.getById(countryDTO.getCountryId()) == null)
         {
             responseData.setSuccess(false);
             responseData.setDesc("Update failed");

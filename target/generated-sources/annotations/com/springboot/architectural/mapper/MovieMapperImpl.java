@@ -17,7 +17,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-03-28T20:31:26+0700",
+    date = "2024-03-29T11:09:22+0700",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 17.0.10 (Amazon.com Inc.)"
 )
 public class MovieMapperImpl implements MovieMapper {
@@ -30,12 +30,12 @@ public class MovieMapperImpl implements MovieMapper {
 
         MovieDTO movieDTO = new MovieDTO();
 
-        movieDTO.setCountry_id( movieCountryCountry_id( movie ) );
-        movieDTO.setMovie_id( movie.getMovie_id() );
+        movieDTO.setCountryId( movieCountryCountryId( movie ) );
+        movieDTO.setMovieId( movie.getMovieId() );
         movieDTO.setName( movie.getName() );
-        movieDTO.setMovie_content( movie.getMovie_content() );
+        movieDTO.setMovieContent( movie.getMovieContent() );
         movieDTO.setEpisodes( movie.getEpisodes() );
-        movieDTO.setMovie_schedule( movie.getMovie_schedule() );
+        movieDTO.setMovieSchedule( movie.getMovieSchedule() );
         movieDTO.setImage( movie.getImage() );
         movieDTO.setCountry( movie.getCountry() );
         movieDTO.setStar( movie.getStar() );
@@ -57,11 +57,11 @@ public class MovieMapperImpl implements MovieMapper {
 
         Movie movie = new Movie();
 
-        movie.setMovie_id( movieDTO.getMovie_id() );
+        movie.setMovieId( movieDTO.getMovieId() );
         movie.setName( movieDTO.getName() );
-        movie.setMovie_content( movieDTO.getMovie_content() );
+        movie.setMovieContent( movieDTO.getMovieContent() );
         movie.setEpisodes( movieDTO.getEpisodes() );
-        movie.setMovie_schedule( movieDTO.getMovie_schedule() );
+        movie.setMovieSchedule( movieDTO.getMovieSchedule() );
         movie.setImage( movieDTO.getImage() );
         movie.setCountry( movieDTO.getCountry() );
         movie.setStar( movieDTO.getStar() );
@@ -75,7 +75,7 @@ public class MovieMapperImpl implements MovieMapper {
         return movie;
     }
 
-    private Integer movieCountryCountry_id(Movie movie) {
+    private Integer movieCountryCountryId(Movie movie) {
         if ( movie == null ) {
             return null;
         }
@@ -83,11 +83,11 @@ public class MovieMapperImpl implements MovieMapper {
         if ( country == null ) {
             return null;
         }
-        Integer country_id = country.getCountry_id();
-        if ( country_id == null ) {
+        Integer countryId = country.getCountryId();
+        if ( countryId == null ) {
             return null;
         }
-        return country_id;
+        return countryId;
     }
 
     protected EpisodeDTO episodeToEpisodeDTO(Episode episode) {
@@ -97,12 +97,12 @@ public class MovieMapperImpl implements MovieMapper {
 
         EpisodeDTO episodeDTO = new EpisodeDTO();
 
-        episodeDTO.setEpisode_id( episode.getEpisode_id() );
+        episodeDTO.setEpisodeId( episode.getEpisodeId() );
         episodeDTO.setName( episode.getName() );
         episodeDTO.setEpisode( episode.getEpisode() );
         episodeDTO.setSeason( episode.getSeason() );
         episodeDTO.setLink( episode.getLink() );
-        episodeDTO.setDay_submit( episode.getDay_submit() );
+        episodeDTO.setDaySubmit( episode.getDaySubmit() );
 
         return episodeDTO;
     }
@@ -127,7 +127,7 @@ public class MovieMapperImpl implements MovieMapper {
 
         CategoryDTO categoryDTO = new CategoryDTO();
 
-        categoryDTO.setCategory_id( category.getCategory_id() );
+        categoryDTO.setCategoryId( category.getCategoryId() );
         categoryDTO.setName( category.getName() );
 
         return categoryDTO;
@@ -153,10 +153,10 @@ public class MovieMapperImpl implements MovieMapper {
 
         PersonDTO personDTO = new PersonDTO();
 
-        personDTO.setPerson_id( person.getPerson_id() );
+        personDTO.setPersonId( person.getPersonId() );
         personDTO.setName( person.getName() );
         personDTO.setGender( person.getGender() );
-        personDTO.setDay_of_birth( person.getDay_of_birth() );
+        personDTO.setDayOfBirth( person.getDayOfBirth() );
         personDTO.setImage( person.getImage() );
         personDTO.setDescribe( person.getDescribe() );
         personDTO.setCountry( person.getCountry() );
@@ -184,12 +184,12 @@ public class MovieMapperImpl implements MovieMapper {
 
         Episode episode = new Episode();
 
-        episode.setEpisode_id( episodeDTO.getEpisode_id() );
+        episode.setEpisodeId( episodeDTO.getEpisodeId() );
         episode.setName( episodeDTO.getName() );
         episode.setEpisode( episodeDTO.getEpisode() );
         episode.setSeason( episodeDTO.getSeason() );
         episode.setLink( episodeDTO.getLink() );
-        episode.setDay_submit( episodeDTO.getDay_submit() );
+        episode.setDaySubmit( episodeDTO.getDaySubmit() );
 
         return episode;
     }
@@ -214,7 +214,7 @@ public class MovieMapperImpl implements MovieMapper {
 
         Category category = new Category();
 
-        category.setCategory_id( categoryDTO.getCategory_id() );
+        category.setCategoryId( categoryDTO.getCategoryId() );
         category.setName( categoryDTO.getName() );
 
         return category;
@@ -240,10 +240,10 @@ public class MovieMapperImpl implements MovieMapper {
 
         Person person = new Person();
 
-        person.setPerson_id( personDTO.getPerson_id() );
+        person.setPersonId( personDTO.getPersonId() );
         person.setName( personDTO.getName() );
         person.setGender( personDTO.getGender() );
-        person.setDay_of_birth( personDTO.getDay_of_birth() );
+        person.setDayOfBirth( personDTO.getDayOfBirth() );
         person.setImage( personDTO.getImage() );
         person.setDescribe( personDTO.getDescribe() );
         person.setCountry( personDTO.getCountry() );

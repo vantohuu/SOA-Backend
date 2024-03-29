@@ -47,7 +47,7 @@ public class RoleController {
     @PutMapping("/update")
     public ResponseEntity<?> updateRole(@RequestBody RoleDTO role){
         ResponseData responseData = new ResponseData();
-        if (roleService.getById(role.getRole_id()) == null)
+        if (roleService.getById(role.getRoleId()) == null)
         {
             responseData.setSuccess(false);
             responseData.setDesc("Update failed");

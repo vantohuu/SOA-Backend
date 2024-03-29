@@ -45,7 +45,7 @@ public class MovieUserServiceImp implements MovieUserService {
     @Override
     public Movie_UserDTO add(Movie_UserDTO movieDTO) {
         Movie_User entity = MovieUserMapper.INSTANCE.movieUserDtoToMovieUser(movieDTO);
-        entity.setRole(roleRepository.findById(entity.getRole().getRole_id()).orElse(null));
+        entity.setRole(roleRepository.findById(entity.getRole().getRoleId()).orElse(null));
         return  MovieUserMapper.INSTANCE.movieUserToMovieUserDto(movieUserRepository.save(entity));
     }
 
@@ -53,7 +53,7 @@ public class MovieUserServiceImp implements MovieUserService {
     public Movie_UserDTO update(Movie_UserDTO movieDTO) {
         if (movieDTO.getUsername() == null) return null;
         Optional<Movie_User> movie_userCheck = movieUserRepository.findById(movieDTO.getUsername());
-        Optional<Role> roleCheck = roleRepository.findById(movieDTO.getRole_id());
+        Optional<Role> roleCheck = roleRepository.findById(movieDTO.getRoleId());
         if (movie_userCheck.isEmpty() || roleCheck.isEmpty()) return  null;
         Movie_User entity = MovieUserMapper.INSTANCE.movieUserDtoToMovieUser(movieDTO);
         entity.setRole(roleCheck.orElse(null));

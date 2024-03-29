@@ -11,7 +11,7 @@ import org.mapstruct.factory.Mappers;
 @Mapper
 public interface PersonMapper {
     PersonMapper INSTANCE = Mappers.getMapper(PersonMapper.class );
-    @Mapping(target = "person_id", source = "person.country.country_id")
+    @Mapping(target = "personId", source = "person.country.countryId")
     PersonDTO personToPersonDto(Person person);
     Person personDtoToPerson(PersonDTO personDTO);
 }

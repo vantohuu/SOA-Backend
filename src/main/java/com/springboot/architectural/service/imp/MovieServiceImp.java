@@ -55,15 +55,15 @@ public class MovieServiceImp implements MovieService {
     @Override
     public MovieDTO add(MovieDTO movieDTO) {
         Movie entity = MovieMapper.INSTANCE.movieDtoToMovie(movieDTO);
-        entity.setCountry(countryRepository.findById(movieDTO.getCountry_id()).get());
+        entity.setCountry(countryRepository.findById(movieDTO.getCountryId()).get());
         return  MovieMapper.INSTANCE.movieToMovieDto(movieRepository.save(entity));
     }
 
     @Override
     public MovieDTO update(MovieDTO movieDTO) {
-        if (movieDTO.getMovie_id() == null) return null;
-        Optional<Movie> roomCheck = movieRepository.findById(movieDTO.getMovie_id());
-        Optional<Country> countryCheck = countryRepository.findById(movieDTO.getCountry_id());
+        if (movieDTO.getMovieId() == null) return null;
+        Optional<Movie> roomCheck = movieRepository.findById(movieDTO.getMovieId());
+        Optional<Country> countryCheck = countryRepository.findById(movieDTO.getCountryId());
         if (roomCheck.isEmpty() || countryCheck.isEmpty()) return  null;
         Movie entity = MovieMapper.INSTANCE.movieDtoToMovie(movieDTO);
         entity.setCountry(countryCheck.orElse(null));

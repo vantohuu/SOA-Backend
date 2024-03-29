@@ -12,7 +12,7 @@ import lombok.ToString;
 @ToString
 public class CountryDTO {
 
-    private Integer country_id;
+    private Integer countryId;
     private String name;
 
 }
