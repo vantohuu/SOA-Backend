@@ -42,7 +42,7 @@ public class CategoryServiceImp implements CategoryService {
 
     @Override
     public CategoryDTO update(CategoryDTO categoryDTO) {
-        Optional<Category> checkRR = categoryRepository.findById(categoryDTO.getCategory_id());
+        Optional<Category> checkRR = categoryRepository.findById(categoryDTO.getCategoryId());
         if (checkRR.isEmpty()) return null;
         Category roomRegisEntity = CategoryMapper.INSTANCE.categoryDtoToCategory(categoryDTO);
         return  CategoryMapper.INSTANCE.categoryToCategoryDto(categoryRepository.save(roomRegisEntity));

@@ -42,7 +42,7 @@ public class EpisodeServiceImp implements EpisodeService {
     public EpisodeDTO add(EpisodeDTO episodeDTO) {
         Episode entity = EpisodeDTOMapper.INSTANCE.episodeDtoToEpisode(episodeDTO);
         if (episodeDTO.getName() == null ) return null;
-        Optional<Movie> movie = movieRepository.findById(episodeDTO.getMovie_id());
+        Optional<Movie> movie = movieRepository.findById(episodeDTO.getMovieId());
         if (movie.isEmpty()) return null;
         entity.setMovie(movie.get());
         return  EpisodeDTOMapper.INSTANCE.episodeToEpisodeDto(episodeRepository.save(entity));
@@ -50,9 +50,9 @@ public class EpisodeServiceImp implements EpisodeService {
 
     @Override
     public EpisodeDTO update(EpisodeDTO episodeDTO) {
-        Optional<Episode> checkRR = episodeRepository.findById(episodeDTO.getEpisode_id());
+        Optional<Episode> checkRR = episodeRepository.findById(episodeDTO.getEpisodeId());
         if (checkRR.isEmpty()) return null;
-        Optional<Movie> movie = movieRepository.findById(episodeDTO.getMovie_id());
+        Optional<Movie> movie = movieRepository.findById(episodeDTO.getMovieId());
         if (movie.isEmpty()) return null;
         Episode entity = EpisodeDTOMapper.INSTANCE.episodeDtoToEpisode(episodeDTO);
         entity.setMovie(movie.get());

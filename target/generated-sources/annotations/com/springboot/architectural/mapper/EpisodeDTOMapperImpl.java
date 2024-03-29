@@ -7,7 +7,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-03-28T20:31:26+0700",
+    date = "2024-03-29T11:09:22+0700",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 17.0.10 (Amazon.com Inc.)"
 )
 public class EpisodeDTOMapperImpl implements EpisodeDTOMapper {
@@ -20,13 +20,13 @@ public class EpisodeDTOMapperImpl implements EpisodeDTOMapper {
 
         EpisodeDTO episodeDTO = new EpisodeDTO();
 
-        episodeDTO.setMovie_id( episodeMovieMovie_id( episode ) );
-        episodeDTO.setEpisode_id( episode.getEpisode_id() );
+        episodeDTO.setMovieId( episodeMovieMovieId( episode ) );
+        episodeDTO.setEpisodeId( episode.getEpisodeId() );
         episodeDTO.setName( episode.getName() );
         episodeDTO.setEpisode( episode.getEpisode() );
         episodeDTO.setSeason( episode.getSeason() );
         episodeDTO.setLink( episode.getLink() );
-        episodeDTO.setDay_submit( episode.getDay_submit() );
+        episodeDTO.setDaySubmit( episode.getDaySubmit() );
 
         return episodeDTO;
     }
@@ -39,17 +39,17 @@ public class EpisodeDTOMapperImpl implements EpisodeDTOMapper {
 
         Episode episode = new Episode();
 
-        episode.setEpisode_id( episodeDTO.getEpisode_id() );
+        episode.setEpisodeId( episodeDTO.getEpisodeId() );
         episode.setName( episodeDTO.getName() );
         episode.setEpisode( episodeDTO.getEpisode() );
         episode.setSeason( episodeDTO.getSeason() );
         episode.setLink( episodeDTO.getLink() );
-        episode.setDay_submit( episodeDTO.getDay_submit() );
+        episode.setDaySubmit( episodeDTO.getDaySubmit() );
 
         return episode;
     }
 
-    private Integer episodeMovieMovie_id(Episode episode) {
+    private Integer episodeMovieMovieId(Episode episode) {
         if ( episode == null ) {
             return null;
         }
@@ -57,10 +57,10 @@ public class EpisodeDTOMapperImpl implements EpisodeDTOMapper {
         if ( movie == null ) {
             return null;
         }
-        Integer movie_id = movie.getMovie_id();
-        if ( movie_id == null ) {
+        Integer movieId = movie.getMovieId();
+        if ( movieId == null ) {
             return null;
         }
-        return movie_id;
+        return movieId;
     }
 }

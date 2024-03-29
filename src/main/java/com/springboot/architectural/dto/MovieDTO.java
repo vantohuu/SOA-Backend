@@ -14,13 +14,13 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MovieDTO {
-    private Integer movie_id;
+    private Integer movieId;
     private String name;
-    private String movie_content;
+    private String movieContent;
     private Integer episodes;
-    private Integer movie_schedule;
+    private Integer movieSchedule;
     private String image;
-    private Integer country_id;
+    private Integer countryId;
     private Country country;
     private  float star;
     private Integer price;

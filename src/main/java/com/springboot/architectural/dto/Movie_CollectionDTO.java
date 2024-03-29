@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Movie_CollectionDTO {
     private Integer id;
-    private Integer movie_id;
+    private Integer movieId;
     private String username;
     private Movie movie;
     private Movie_User movieUser;

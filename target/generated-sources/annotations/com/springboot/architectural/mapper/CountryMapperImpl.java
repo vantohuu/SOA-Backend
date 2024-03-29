@@ -6,7 +6,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-03-28T20:31:26+0700",
+    date = "2024-03-29T11:09:22+0700",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 17.0.10 (Amazon.com Inc.)"
 )
 public class CountryMapperImpl implements CountryMapper {
@@ -19,7 +19,7 @@ public class CountryMapperImpl implements CountryMapper {
 
         CountryDTO countryDTO = new CountryDTO();
 
-        countryDTO.setCountry_id( country.getCountry_id() );
+        countryDTO.setCountryId( country.getCountryId() );
         countryDTO.setName( country.getName() );
 
         return countryDTO;
@@ -33,7 +33,7 @@ public class CountryMapperImpl implements CountryMapper {
 
         Country country = new Country();
 
-        country.setCountry_id( countryDto.getCountry_id() );
+        country.setCountryId( countryDto.getCountryId() );
         country.setName( countryDto.getName() );
 
         return country;

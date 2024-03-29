@@ -15,7 +15,8 @@ import java.sql.Date;
 public class Episode {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer episode_id;
+    @Column(name = "episode_id")
+    private Integer episodeId;
     private String name;
     private Integer episode;
     private String season;
@@ -23,5 +24,6 @@ public class Episode {
     @ManyToOne
     @JoinColumn(name = "movie_id")
     private Movie movie;
-    private Date day_submit;
+    @Column(name = "day_submit")
+    private Date daySubmit;
 }

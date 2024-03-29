@@ -11,7 +11,7 @@ import org.mapstruct.factory.Mappers;
 @Mapper
 public interface EpisodeDTOMapper {
     EpisodeDTOMapper INSTANCE = Mappers.getMapper(EpisodeDTOMapper.class );
-    @Mapping(target = "movie_id", source = "episode.movie.movie_id")
+    @Mapping(target = "movieId", source = "episode.movie.movieId")
     EpisodeDTO episodeToEpisodeDto(Episode episode);
     Episode episodeDtoToEpisode(EpisodeDTO episodeDTO);
 }

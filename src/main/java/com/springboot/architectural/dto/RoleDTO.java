@@ -13,7 +13,7 @@ import java.util.Optional;
 @NoArgsConstructor
 @ToString
 public class RoleDTO {
-    private Integer role_id;
+    private Integer roleId;
     private String name;
 
 }

@@ -57,7 +57,7 @@ public class MovieController {
     @PutMapping("/update")
     public ResponseEntity<?> updateRoom(@RequestBody MovieDTO movie){
         ResponseData responseData = new ResponseData();
-        if (movieService.getById(movie.getMovie_id()) == null)
+        if (movieService.getById(movie.getMovieId()) == null)
         {
             responseData.setSuccess(false);
             responseData.setDesc("Update failed");

@@ -7,7 +7,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-03-28T20:31:26+0700",
+    date = "2024-03-29T11:09:22+0700",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 17.0.10 (Amazon.com Inc.)"
 )
 public class PersonMapperImpl implements PersonMapper {
@@ -20,10 +20,10 @@ public class PersonMapperImpl implements PersonMapper {
 
         PersonDTO personDTO = new PersonDTO();
 
-        personDTO.setPerson_id( personCountryCountry_id( person ) );
+        personDTO.setPersonId( personCountryCountryId( person ) );
         personDTO.setName( person.getName() );
         personDTO.setGender( person.getGender() );
-        personDTO.setDay_of_birth( person.getDay_of_birth() );
+        personDTO.setDayOfBirth( person.getDayOfBirth() );
         personDTO.setImage( person.getImage() );
         personDTO.setDescribe( person.getDescribe() );
         personDTO.setCountry( person.getCountry() );
@@ -39,10 +39,10 @@ public class PersonMapperImpl implements PersonMapper {
 
         Person person = new Person();
 
-        person.setPerson_id( personDTO.getPerson_id() );
+        person.setPersonId( personDTO.getPersonId() );
         person.setName( personDTO.getName() );
         person.setGender( personDTO.getGender() );
-        person.setDay_of_birth( personDTO.getDay_of_birth() );
+        person.setDayOfBirth( personDTO.getDayOfBirth() );
         person.setImage( personDTO.getImage() );
         person.setDescribe( personDTO.getDescribe() );
         person.setCountry( personDTO.getCountry() );
@@ -50,7 +50,7 @@ public class PersonMapperImpl implements PersonMapper {
         return person;
     }
 
-    private Integer personCountryCountry_id(Person person) {
+    private Integer personCountryCountryId(Person person) {
         if ( person == null ) {
             return null;
         }
@@ -58,10 +58,10 @@ public class PersonMapperImpl implements PersonMapper {
         if ( country == null ) {
             return null;
         }
-        Integer country_id = country.getCountry_id();
-        if ( country_id == null ) {
+        Integer countryId = country.getCountryId();
+        if ( countryId == null ) {
             return null;
         }
-        return country_id;
+        return countryId;
     }
 }

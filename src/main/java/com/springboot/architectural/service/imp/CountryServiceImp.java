@@ -42,7 +42,7 @@ public class CountryServiceImp implements CountryService {
 
     @Override
     public CountryDTO update(CountryDTO countryDTO) {
-        Optional<Country> checkRR = countryRepository.findById(countryDTO.getCountry_id());
+        Optional<Country> checkRR = countryRepository.findById(countryDTO.getCountryId());
         if (checkRR.isEmpty()) return null;
         Country entity = CountryMapper.INSTANCE.countryDtoToCountry(countryDTO);
         return  CountryMapper.INSTANCE.countryToCountryDto(countryRepository.save(entity));

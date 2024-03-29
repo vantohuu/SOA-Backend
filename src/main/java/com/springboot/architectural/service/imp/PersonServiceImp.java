@@ -50,15 +50,15 @@ public class PersonServiceImp implements PersonService {
     @Override
     public PersonDTO add(PersonDTO personDTO) {
         Person entity = PersonMapper.INSTANCE.personDtoToPerson(personDTO);
-        entity.setCountry(countryRepository.findById(entity.getCountry().getCountry_id()).get());
+        entity.setCountry(countryRepository.findById(entity.getCountry().getCountryId()).get());
         return  PersonMapper.INSTANCE.personToPersonDto(personRepository.save(entity));
     }
 
     @Override
     public PersonDTO update(PersonDTO personDTO) {
-        if (personDTO.getPerson_id() == null) return null;
-        Optional<Person> personCheck = personRepository.findById(personDTO.getPerson_id());
-        Optional<Country> countryCheck = countryRepository.findById(personDTO.getCountry_id());
+        if (personDTO.getPersonId() == null) return null;
+        Optional<Person> personCheck = personRepository.findById(personDTO.getPersonId());
+        Optional<Country> countryCheck = countryRepository.findById(personDTO.getCountryId());
         if (personCheck.isEmpty() || countryCheck.isEmpty()) return  null;
         Person entity = PersonMapper.INSTANCE.personDtoToPerson(personDTO);
         entity.setCountry(countryCheck.orElse(null));

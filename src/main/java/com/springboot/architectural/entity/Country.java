@@ -15,7 +15,7 @@ import lombok.ToString;
 public class Country {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    private Integer country_id;
+    @Column(name = "country_id")
+    private Integer countryId;
     private String name;
 }

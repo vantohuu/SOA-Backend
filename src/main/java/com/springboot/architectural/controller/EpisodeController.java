@@ -46,7 +46,7 @@ public class EpisodeController {
     @PutMapping("/update")
     public ResponseEntity<?> update(@RequestBody EpisodeDTO episodeDTO){
         ResponseData responseData = new ResponseData();
-        if (episodeService.getById(episodeDTO.getEpisode_id()) == null)
+        if (episodeService.getById(episodeDTO.getEpisodeId()) == null)
         {
             responseData.setSuccess(false);
             responseData.setDesc("Update failed");
