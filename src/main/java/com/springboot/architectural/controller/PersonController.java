@@ -43,7 +43,9 @@ public class PersonController {
     @PostMapping("/create")
     public ResponseEntity<?> createRoom(@RequestBody PersonDTO person){
         ResponseData responseData = new ResponseData();
-        responseData.setData(personService.add(person));
+        PersonDTO reposeDTO = personService.add(person);
+        if (reposeDTO == null) return new ResponseEntity<>(responseData.getData(), HttpStatus.NOT_FOUND);
+        responseData.setData(reposeDTO);
         responseData.setDesc("Create person successfully");
         return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
@@ -56,7 +58,9 @@ public class PersonController {
             responseData.setDesc("Update failed");
             return new ResponseEntity<>(responseData.getData(), HttpStatus.NOT_FOUND);
         }
-        responseData.setData(personService.update(person));
+        PersonDTO reposeDTO = personService.update(person);
+        if (reposeDTO == null) return new ResponseEntity<>(responseData.getData(), HttpStatus.NOT_FOUND);
+        responseData.setData(reposeDTO);
         responseData.setDesc("Update person successfully");
         return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
@@ -72,7 +76,6 @@ public class PersonController {
         }
         responseData.setData(personService.delete(id));
         responseData.setDesc("Delete person successfully");
-
         return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
 

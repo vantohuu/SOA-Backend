@@ -6,10 +6,10 @@ import com.springboot.architectural.dto.Movie_CollectionDTO;
 import java.util.List;
 
 public interface MovieCollectionService {
-    Movie_CollectionDTO getById(String id);
+    Movie_CollectionDTO getById(Integer id);
     List<Movie_CollectionDTO> getAll();
     Movie_CollectionDTO add(Movie_CollectionDTO movieCollectionDTO);
     Movie_CollectionDTO update(Movie_CollectionDTO movieCollectionDTO);
-    boolean delete(String id);
+    boolean delete(Integer id);
 
 }

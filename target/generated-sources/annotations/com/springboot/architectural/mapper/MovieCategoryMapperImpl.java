@@ -1,12 +1,14 @@
 package com.springboot.architectural.mapper;
 
 import com.springboot.architectural.dto.Movie_CategoryDTO;
+import com.springboot.architectural.entity.Category;
+import com.springboot.architectural.entity.Movie;
 import com.springboot.architectural.entity.Movie_Category;
 import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-03-29T11:09:22+0700",
+    date = "2024-03-29T23:36:56+0700",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 17.0.10 (Amazon.com Inc.)"
 )
 public class MovieCategoryMapperImpl implements MovieCategoryMapper {
@@ -19,9 +21,9 @@ public class MovieCategoryMapperImpl implements MovieCategoryMapper {
 
         Movie_CategoryDTO movie_CategoryDTO = new Movie_CategoryDTO();
 
+        movie_CategoryDTO.setMovieId( movieCategoryMovieMovieId( movieCategory ) );
+        movie_CategoryDTO.setCategoryId( movieCategoryCategoryCategoryId( movieCategory ) );
         movie_CategoryDTO.setId( movieCategory.getId() );
-        movie_CategoryDTO.setMovie( movieCategory.getMovie() );
-        movie_CategoryDTO.setCategory( movieCategory.getCategory() );
 
         return movie_CategoryDTO;
     }
@@ -35,9 +37,37 @@ public class MovieCategoryMapperImpl implements MovieCategoryMapper {
         Movie_Category movie_Category = new Movie_Category();
 
         movie_Category.setId( movieCategoryDTO.getId() );
-        movie_Category.setMovie( movieCategoryDTO.getMovie() );
-        movie_Category.setCategory( movieCategoryDTO.getCategory() );
 
         return movie_Category;
+    }
+
+    private Integer movieCategoryMovieMovieId(Movie_Category movie_Category) {
+        if ( movie_Category == null ) {
+            return null;
+        }
+        Movie movie = movie_Category.getMovie();
+        if ( movie == null ) {
+            return null;
+        }
+        Integer movieId = movie.getMovieId();
+        if ( movieId == null ) {
+            return null;
+        }
+        return movieId;
+    }
+
+    private Integer movieCategoryCategoryCategoryId(Movie_Category movie_Category) {
+        if ( movie_Category == null ) {
+            return null;
+        }
+        Category category = movie_Category.getCategory();
+        if ( category == null ) {
+            return null;
+        }
+        Integer categoryId = category.getCategoryId();
+        if ( categoryId == null ) {
+            return null;
+        }
+        return categoryId;
     }
 }

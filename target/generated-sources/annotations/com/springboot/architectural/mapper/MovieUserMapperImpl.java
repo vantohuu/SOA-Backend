@@ -1,12 +1,14 @@
 package com.springboot.architectural.mapper;
 
 import com.springboot.architectural.dto.Movie_UserDTO;
+import com.springboot.architectural.dto.RoleDTO;
 import com.springboot.architectural.entity.Movie_User;
+import com.springboot.architectural.entity.Role;
 import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-03-29T11:09:22+0700",
+    date = "2024-03-29T23:36:57+0700",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 17.0.10 (Amazon.com Inc.)"
 )
 public class MovieUserMapperImpl implements MovieUserMapper {
@@ -25,7 +27,7 @@ public class MovieUserMapperImpl implements MovieUserMapper {
         movie_UserDTO.setEmail( movieUser.getEmail() );
         movie_UserDTO.setAvatar( movieUser.getAvatar() );
         movie_UserDTO.setMoney( movieUser.getMoney() );
-        movie_UserDTO.setRole( movieUser.getRole() );
+        movie_UserDTO.setRole( roleToRoleDTO( movieUser.getRole() ) );
 
         return movie_UserDTO;
     }
@@ -44,8 +46,34 @@ public class MovieUserMapperImpl implements MovieUserMapper {
         movie_User.setEmail( movieUserDTO.getEmail() );
         movie_User.setAvatar( movieUserDTO.getAvatar() );
         movie_User.setMoney( movieUserDTO.getMoney() );
-        movie_User.setRole( movieUserDTO.getRole() );
+        movie_User.setRole( roleDTOToRole( movieUserDTO.getRole() ) );
 
         return movie_User;
+    }
+
+    protected RoleDTO roleToRoleDTO(Role role) {
+        if ( role == null ) {
+            return null;
+        }
+
+        RoleDTO roleDTO = new RoleDTO();
+
+        roleDTO.setRoleId( role.getRoleId() );
+        roleDTO.setName( role.getName() );
+
+        return roleDTO;
+    }
+
+    protected Role roleDTOToRole(RoleDTO roleDTO) {
+        if ( roleDTO == null ) {
+            return null;
+        }
+
+        Role role = new Role();
+
+        role.setRoleId( roleDTO.getRoleId() );
+        role.setName( roleDTO.getName() );
+
+        return role;
     }
 }

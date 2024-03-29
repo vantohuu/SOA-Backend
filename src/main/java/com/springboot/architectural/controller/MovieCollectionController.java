@@ -20,7 +20,7 @@ public class MovieCollectionController {
     @Autowired
     MovieCollectionService movieCollectionService;
     @GetMapping("/{id}")
-    public ResponseEntity<?> getOne(@PathVariable(name = "id") String id){
+    public ResponseEntity<?> getOne(@PathVariable(name = "id") Integer id){
         ResponseData responseData = new ResponseData();
         if (movieCollectionService.getById(id) == null)
         {
@@ -50,8 +50,9 @@ public class MovieCollectionController {
         if (r == null)
         {
             responseData.setDesc("Create failed");
-
             responseData.setSuccess(false);
+            return new ResponseEntity<>(responseData.getData(), HttpStatus.CONFLICT);
+
         }
         return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
@@ -71,16 +72,16 @@ public class MovieCollectionController {
         return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
     @DeleteMapping("/delete")
-    public ResponseEntity<?> deleteRoom(@RequestParam String username){
+    public ResponseEntity<?> delete(@RequestParam Integer id){
         ResponseData responseData = new ResponseData();
-        if (movieCollectionService.getById(username) == null)
+        if (movieCollectionService.getById(id) == null)
         {
             responseData.setSuccess(false);
             responseData.setDesc("Delete failed");
 
             return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
         }
-        responseData.setData(movieCollectionService.delete(username));
+        responseData.setData(movieCollectionService.delete(id));
         responseData.setDesc("Delete successfully");
 
         return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);

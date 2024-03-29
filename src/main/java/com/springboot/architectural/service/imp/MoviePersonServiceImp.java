@@ -42,6 +42,7 @@ public class MoviePersonServiceImp implements MoviePersonService {
         Optional<Movie> movie = movieRepository.findById(moviePersonDTO.getMovieId());
         Optional<Person> person = personRepository.findById(moviePersonDTO.getPersonId());
         if (movie.isEmpty() || person.isEmpty()) return null;
+        if (!moviePersonRepository.findByMovieAndPerson(movie.get(), person.get()).isEmpty()) return  null;
         entity.setPerson(person.get());
         entity.setMovie(movie.get());
         return  MoviePersonMapper.INSTANCE.moviePersonToMoviePersonDto(moviePersonRepository.save(entity));

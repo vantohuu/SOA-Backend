@@ -37,7 +37,7 @@ public class LoginServiceImp implements LoginService {
     @Override
     public boolean addUser(SignUpRequest signUpRequest) {
         Movie_User account = new Movie_User();
-        RoleDTO role = roleService.getById(signUpRequest.getRole_id());
+        RoleDTO role = roleService.getById(signUpRequest.getRoleId());
         if (role == null) return false;
         account.setRole(RoleMapper.INSTANCE.roleDtoToRole(role));
 //        account.setAvatar(signUpRequest.get);

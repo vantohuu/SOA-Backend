@@ -19,5 +19,5 @@ public class Movie_UserDTO {
     private String avatar;
     private Integer money;
     private Integer roleId;
-    private Role role;
+    private RoleDTO role;
 }

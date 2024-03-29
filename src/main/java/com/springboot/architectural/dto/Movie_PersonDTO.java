@@ -14,6 +14,6 @@ public class Movie_PersonDTO {
     private Integer id;
     private Integer movieId;
     private Integer personId;
-    private Movie movie;
-    private Person person;
+    private String movieName;
+    private PersonDTO person;
 }

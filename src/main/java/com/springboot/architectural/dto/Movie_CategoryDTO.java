@@ -1,5 +1,6 @@
 package com.springboot.architectural.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.springboot.architectural.entity.Category;
 import com.springboot.architectural.entity.Movie;
 import jakarta.persistence.*;
@@ -14,7 +15,7 @@ public class Movie_CategoryDTO {
     private Integer id;
     private Integer movieId;
     private Integer categoryId;
-    private Movie movie;
-    private Category category;
+//    private MovieDTO movie;
+//    private CategoryDTO category;
 
 }

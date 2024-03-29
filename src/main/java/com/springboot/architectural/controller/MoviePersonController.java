@@ -45,8 +45,9 @@ public class MoviePersonController {
         if (r == null)
         {
             responseData.setDesc("Create failed");
-
             responseData.setSuccess(false);
+            return new ResponseEntity<>(responseData.getData(), HttpStatus.CONFLICT);
+
         }
         return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }

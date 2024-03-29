@@ -27,13 +27,14 @@ public class MovieCategoryServiceImp implements MovieCategoryService {
     private CategoryRepository categoryRepository;
 
     @Override
-    public Movie_CategoryDTO getById(int id) {
+    public Movie_CategoryDTO getById(Integer id) {
         Optional<Movie_Category> entity = movieCategoryRepository.findById(id);
         return entity.map(MovieCategoryMapper.INSTANCE::movieCategoryToMovieCategoryDto).orElse(null);
     }
-
+    @Override
     public List<Movie_CategoryDTO> getAll() {
         List<Movie_Category> list = movieCategoryRepository.findAll();
+//        System.out.println(list.get(0));
         return list.stream().map(MovieCategoryMapper.INSTANCE::movieCategoryToMovieCategoryDto).collect(Collectors.toList());
     }
 
@@ -44,6 +45,7 @@ public class MovieCategoryServiceImp implements MovieCategoryService {
         Optional<Movie> movie = movieRepository.findById(movieCategoryDTO.getMovieId());
         Optional<Category> category = categoryRepository.findById(movieCategoryDTO.getCategoryId());
         if (movie.isEmpty() || category.isEmpty()) return null;
+        if (!movieCategoryRepository.findByMovieAndCategory(movie.get(), category.get()).isEmpty()) return  null;
         entity.setCategory(category.get());
         entity.setMovie(movie.get());
         return  MovieCategoryMapper.INSTANCE.movieCategoryToMovieCategoryDto(movieCategoryRepository.save(entity));

@@ -2,6 +2,7 @@ package com.springboot.architectural.service.imp;
 
 import com.springboot.architectural.dto.Movie_CollectionDTO;
 import com.springboot.architectural.entity.*;
+import com.springboot.architectural.mapper.MovieCategoryMapper;
 import com.springboot.architectural.mapper.MovieCollectionMapper;
 import com.springboot.architectural.repository.*;
 import com.springboot.architectural.service.MovieCollectionService;
@@ -22,7 +23,7 @@ public class MovieCollectionServiceImp implements MovieCollectionService {
     private MovieUserRepository movieUserRepository;
 
     @Override
-    public Movie_CollectionDTO getById(String id) {
+    public Movie_CollectionDTO getById(Integer id) {
         Optional<Movie_Collection> entity = movieCollectionRepository.findById(id);
         return entity.map(MovieCollectionMapper.INSTANCE::movieCollectionToMovieCollectionDto).orElse(null);
     }
@@ -33,13 +34,14 @@ public class MovieCollectionServiceImp implements MovieCollectionService {
     }
 
     @Override
-    public Movie_CollectionDTO add(Movie_CollectionDTO moviePersonDTO) {
-        Movie_Collection entity = MovieCollectionMapper.INSTANCE.movieCollectionDtoToMovieCollection(moviePersonDTO);
-        if (moviePersonDTO.getMovieId() == null || moviePersonDTO.getUsername() == null  ) return null;
-        Optional<Movie> movie = movieRepository.findById(moviePersonDTO.getMovieId());
-        Optional<Movie_User> person = movieUserRepository.findById(moviePersonDTO.getUsername());
-        if (movie.isEmpty() || person.isEmpty()) return null;
-        entity.setMovieUser(person.get());
+    public Movie_CollectionDTO add(Movie_CollectionDTO movieCollectionDTO) {
+        Movie_Collection entity = MovieCollectionMapper.INSTANCE.movieCollectionDtoToMovieCollection(movieCollectionDTO);
+        if (movieCollectionDTO.getMovieId() == null || movieCollectionDTO.getUsername()== null  ) return null;
+        Optional<Movie> movie = movieRepository.findById(movieCollectionDTO.getMovieId());
+        Optional<Movie_User> movieUser = movieUserRepository.findById(movieCollectionDTO.getUsername());
+        if (movie.isEmpty() || movieUser.isEmpty()) return null;
+        if (!movieCollectionRepository.findByMovieAndMovieUser(movie.get(), movieUser.get()).isEmpty()) return  null;
+        entity.setMovieUser(movieUser.get());
         entity.setMovie(movie.get());
         return  MovieCollectionMapper.INSTANCE.movieCollectionToMovieCollectionDto(movieCollectionRepository.save(entity));
     }
@@ -48,7 +50,7 @@ public class MovieCollectionServiceImp implements MovieCollectionService {
     public Movie_CollectionDTO update(Movie_CollectionDTO movieCollectionDTO) {
         System.out.println(movieCollectionDTO);
         if (movieCollectionDTO.getId() == null) return null;
-        Optional<Movie_Collection> checkRR = movieCollectionRepository.findById(movieCollectionDTO.getUsername());
+        Optional<Movie_Collection> checkRR = movieCollectionRepository.findById(movieCollectionDTO.getId());
         if (checkRR.isEmpty()) return  null;
         if (movieCollectionDTO.getMovieId() == null || movieCollectionDTO.getUsername() == null  ) return null;
         Optional<Movie> movie = movieRepository.findById(movieCollectionDTO.getMovieId());
@@ -61,7 +63,7 @@ public class MovieCollectionServiceImp implements MovieCollectionService {
     }
 
     @Override
-    public boolean delete(String id) {
+    public boolean delete(Integer id) {
         Optional<Movie_Collection> r = movieCollectionRepository.findById(id);
         if (r.isPresent())
         {

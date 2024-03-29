@@ -13,5 +13,4 @@ import lombok.ToString;
 public class CategoryDTO {
     private Integer categoryId;
     private String name;
-
 }

@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -41,8 +42,8 @@ public class PersonServiceImp implements PersonService {
 
     @Override
     public List<PersonDTO> getAll(String searchContent,String sortField, String typeSort) {
-        Sort sorted = Sort.by(sortField);
-        sorted = typeSort.equals("asc") ? sorted.ascending() : sorted.descending();
+        Sort sorted = Sort.by(sortField.isEmpty() ? "personId" : sortField );
+        sorted = typeSort.toUpperCase(Locale.ROOT).equals("DESC") ? sorted.descending() : sorted.ascending();
         List<Person> list =  personRepository.findAllFilter(searchContent, sorted);;
         return list.stream().map(PersonMapper.INSTANCE::personToPersonDto).collect(Collectors.toList());
     }
@@ -50,7 +51,10 @@ public class PersonServiceImp implements PersonService {
     @Override
     public PersonDTO add(PersonDTO personDTO) {
         Person entity = PersonMapper.INSTANCE.personDtoToPerson(personDTO);
-        entity.setCountry(countryRepository.findById(entity.getCountry().getCountryId()).get());
+        if (personDTO.getCountryId() == null) return null;
+        Optional<Country> country = countryRepository.findById(personDTO.getCountryId());
+        if (country.isEmpty()) return  null;
+        entity.setCountry(country.get());
         return  PersonMapper.INSTANCE.personToPersonDto(personRepository.save(entity));
     }
 

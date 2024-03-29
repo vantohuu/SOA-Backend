@@ -15,6 +15,12 @@ import org.springframework.web.multipart.MultipartFile;
 public class MovieController {
     @Autowired
     MovieService movieService;
+    @GetMapping("/get-new-movies")
+    public ResponseEntity<?> getAll(@RequestParam(defaultValue = "") Integer top){
+        ResponseData responseData = new ResponseData();
+        responseData.setData(movieService.getAllByTopNewMovie(top));
+        return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
+    }
     @GetMapping("/{id}")
     public ResponseEntity<?> getRoom(@PathVariable(name = "id") Integer id){
         ResponseData responseData = new ResponseData();
@@ -47,6 +53,7 @@ public class MovieController {
         responseData.setData(movieService.getAllByCategory(searchContent, sortField, typeSort,category_id));
         return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
+
     @PostMapping("/create")
     public ResponseEntity<?> createRoom(@RequestBody MovieDTO movie){
         ResponseData responseData = new ResponseData();

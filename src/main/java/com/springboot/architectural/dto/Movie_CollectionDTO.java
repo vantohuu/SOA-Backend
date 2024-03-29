@@ -7,13 +7,17 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Date;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Movie_CollectionDTO {
     private Integer id;
     private Integer movieId;
+    private String movieName;
+    private String imageMovie;
     private String username;
-    private Movie movie;
-    private Movie_User movieUser;
+    private Date time;
+
 }

@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -20,5 +22,6 @@ public class Movie_Collection {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "username")
     private Movie_User movieUser;
+    private Date time;
 
 }

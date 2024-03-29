@@ -17,4 +17,8 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
             "WHERE CONCAT(movie.id, ' ', movie.name) LIKE %?1% and categories.categoryId = ?2 ")
     public List<Movie> findAllFilterByCategory(String searchContent, Integer category_id, Sort pageable);
 
+    @Query(value = "EXEC SelectTopMovie @t = ?1", nativeQuery = true)
+    public List<Movie> getAllByTopNewMovie(Integer top);
+
+
 }

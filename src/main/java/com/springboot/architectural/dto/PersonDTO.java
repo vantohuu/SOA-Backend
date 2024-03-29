@@ -19,5 +19,5 @@ public class PersonDTO {
     private String image;
     private String describe;
     private Integer countryId;
-    private Country country;
+    private CountryDTO country;
 }

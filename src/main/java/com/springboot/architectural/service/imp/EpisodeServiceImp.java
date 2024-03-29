@@ -1,16 +1,11 @@
 package com.springboot.architectural.service.imp;
 
-import com.springboot.architectural.dto.CountryDTO;
 import com.springboot.architectural.dto.EpisodeDTO;
-import com.springboot.architectural.entity.Country;
 import com.springboot.architectural.entity.Episode;
 import com.springboot.architectural.entity.Movie;
-import com.springboot.architectural.mapper.CountryMapper;
-import com.springboot.architectural.mapper.EpisodeDTOMapper;
-import com.springboot.architectural.repository.CountryRepository;
+import com.springboot.architectural.mapper.EpisodeMapper;
 import com.springboot.architectural.repository.EpisodeRepository;
 import com.springboot.architectural.repository.MovieRepository;
-import com.springboot.architectural.service.CountryService;
 import com.springboot.architectural.service.EpisodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,22 +25,22 @@ public class EpisodeServiceImp implements EpisodeService {
     @Override
     public EpisodeDTO getById(int id) {
         Optional<Episode> country = episodeRepository.findById(id);
-        return country.map(EpisodeDTOMapper.INSTANCE::episodeToEpisodeDto).orElse(null);
+        return country.map(EpisodeMapper.INSTANCE::episodeToEpisodeDto).orElse(null);
     }
 
     public List<EpisodeDTO> getAll() {
         List<Episode> episodes = episodeRepository.findAll();
-        return episodes.stream().map(EpisodeDTOMapper.INSTANCE::episodeToEpisodeDto).collect(Collectors.toList());
+        return episodes.stream().map(EpisodeMapper.INSTANCE::episodeToEpisodeDto).collect(Collectors.toList());
     }
 
     @Override
     public EpisodeDTO add(EpisodeDTO episodeDTO) {
-        Episode entity = EpisodeDTOMapper.INSTANCE.episodeDtoToEpisode(episodeDTO);
+        Episode entity = EpisodeMapper.INSTANCE.episodeDtoToEpisode(episodeDTO);
         if (episodeDTO.getName() == null ) return null;
         Optional<Movie> movie = movieRepository.findById(episodeDTO.getMovieId());
         if (movie.isEmpty()) return null;
         entity.setMovie(movie.get());
-        return  EpisodeDTOMapper.INSTANCE.episodeToEpisodeDto(episodeRepository.save(entity));
+        return  EpisodeMapper.INSTANCE.episodeToEpisodeDto(episodeRepository.save(entity));
     }
 
     @Override
@@ -54,9 +49,9 @@ public class EpisodeServiceImp implements EpisodeService {
         if (checkRR.isEmpty()) return null;
         Optional<Movie> movie = movieRepository.findById(episodeDTO.getMovieId());
         if (movie.isEmpty()) return null;
-        Episode entity = EpisodeDTOMapper.INSTANCE.episodeDtoToEpisode(episodeDTO);
+        Episode entity = EpisodeMapper.INSTANCE.episodeDtoToEpisode(episodeDTO);
         entity.setMovie(movie.get());
-        return  EpisodeDTOMapper.INSTANCE.episodeToEpisodeDto(episodeRepository.save(entity));
+        return  EpisodeMapper.INSTANCE.episodeToEpisodeDto(episodeRepository.save(entity));
     }
 
     @Override

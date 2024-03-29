@@ -22,6 +22,6 @@ public class History {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "username")
     private Movie_User movieUser;
-    private Long time_stamp;
+    private Long timeStamp;
 
 }

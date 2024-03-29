@@ -1,13 +1,13 @@
 package com.springboot.architectural.repository;
 
-import com.springboot.architectural.entity.Movie_Collection;
-import com.springboot.architectural.entity.Movie_Person;
+import com.springboot.architectural.entity.*;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface MovieCollectionRepository extends JpaRepository<Movie_Collection, String> {
+public interface MovieCollectionRepository extends JpaRepository<Movie_Collection, Integer> {
+    List<Movie_Collection> findByMovieAndMovieUser(Movie movie, Movie_User movieUser);
 
 }

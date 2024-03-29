@@ -1,6 +1,7 @@
 package com.springboot.architectural.mapper;
 
 import com.springboot.architectural.dto.CategoryDTO;
+import com.springboot.architectural.dto.CountryDTO;
 import com.springboot.architectural.dto.EpisodeDTO;
 import com.springboot.architectural.dto.MovieDTO;
 import com.springboot.architectural.dto.PersonDTO;
@@ -17,7 +18,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-03-29T11:09:22+0700",
+    date = "2024-03-29T23:36:56+0700",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 17.0.10 (Amazon.com Inc.)"
 )
 public class MovieMapperImpl implements MovieMapper {
@@ -146,6 +147,19 @@ public class MovieMapperImpl implements MovieMapper {
         return list;
     }
 
+    protected CountryDTO countryToCountryDTO(Country country) {
+        if ( country == null ) {
+            return null;
+        }
+
+        CountryDTO countryDTO = new CountryDTO();
+
+        countryDTO.setCountryId( country.getCountryId() );
+        countryDTO.setName( country.getName() );
+
+        return countryDTO;
+    }
+
     protected PersonDTO personToPersonDTO(Person person) {
         if ( person == null ) {
             return null;
@@ -159,7 +173,7 @@ public class MovieMapperImpl implements MovieMapper {
         personDTO.setDayOfBirth( person.getDayOfBirth() );
         personDTO.setImage( person.getImage() );
         personDTO.setDescribe( person.getDescribe() );
-        personDTO.setCountry( person.getCountry() );
+        personDTO.setCountry( countryToCountryDTO( person.getCountry() ) );
 
         return personDTO;
     }
@@ -233,6 +247,19 @@ public class MovieMapperImpl implements MovieMapper {
         return set;
     }
 
+    protected Country countryDTOToCountry(CountryDTO countryDTO) {
+        if ( countryDTO == null ) {
+            return null;
+        }
+
+        Country country = new Country();
+
+        country.setCountryId( countryDTO.getCountryId() );
+        country.setName( countryDTO.getName() );
+
+        return country;
+    }
+
     protected Person personDTOToPerson(PersonDTO personDTO) {
         if ( personDTO == null ) {
             return null;
@@ -246,7 +273,7 @@ public class MovieMapperImpl implements MovieMapper {
         person.setDayOfBirth( personDTO.getDayOfBirth() );
         person.setImage( personDTO.getImage() );
         person.setDescribe( personDTO.getDescribe() );
-        person.setCountry( personDTO.getCountry() );
+        person.setCountry( countryDTOToCountry( personDTO.getCountry() ) );
 
         return person;
     }

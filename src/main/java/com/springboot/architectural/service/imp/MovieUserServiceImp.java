@@ -6,6 +6,7 @@ import com.springboot.architectural.entity.Role;
 import com.springboot.architectural.mapper.MovieUserMapper;
 import com.springboot.architectural.repository.MovieUserRepository;
 import com.springboot.architectural.repository.RoleRepository;
+import com.springboot.architectural.security.JwtTokenProvider;
 import com.springboot.architectural.service.FileService;
 import com.springboot.architectural.service.MovieUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -28,6 +30,8 @@ public class MovieUserServiceImp implements MovieUserService {
     private RoleRepository roleRepository;
     @Autowired
     private FileService fileService;
+
+
     @Override
     public Movie_UserDTO getById(String username) {
         Optional<Movie_User> entity = movieUserRepository.findById(username);
@@ -36,8 +40,8 @@ public class MovieUserServiceImp implements MovieUserService {
 
     @Override
     public List<Movie_UserDTO> getAll(String searchContent,String sortField, String typeSort) {
-        Sort sorted = Sort.by(sortField);
-        sorted = typeSort.equals("asc") ? sorted.ascending() : sorted.descending();
+        Sort sorted = Sort.by(sortField.isEmpty() ? "name" : sortField );
+        sorted = typeSort.toUpperCase(Locale.ROOT).equals("DESC") ? sorted.descending() : sorted.ascending();
         List<Movie_User> movieUsers =  movieUserRepository.findAllFilter(searchContent, sorted);;
         return movieUsers.stream().map(MovieUserMapper.INSTANCE::movieUserToMovieUserDto).collect(Collectors.toList());
     }
@@ -46,6 +50,7 @@ public class MovieUserServiceImp implements MovieUserService {
     public Movie_UserDTO add(Movie_UserDTO movieDTO) {
         Movie_User entity = MovieUserMapper.INSTANCE.movieUserDtoToMovieUser(movieDTO);
         entity.setRole(roleRepository.findById(entity.getRole().getRoleId()).orElse(null));
+        if (entity.getRole() == null) return  null;
         return  MovieUserMapper.INSTANCE.movieUserToMovieUserDto(movieUserRepository.save(entity));
     }
 

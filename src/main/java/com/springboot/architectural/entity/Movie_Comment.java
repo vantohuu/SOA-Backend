@@ -26,5 +26,4 @@ public class Movie_Comment {
     private String comment;
     private Integer value;
     private Date date;
-
 }

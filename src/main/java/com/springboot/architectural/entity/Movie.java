@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.HashSet;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.Set;
 
 @Entity
 @Data
+@ToString
 @Table(name = "Movie")
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,14 +22,14 @@ public class Movie {
     @Column(name = "movie_id")
     private Integer movieId;
     private String name;
-    @Column(name = "movieContent")
+    @Column(name = "movie_content")
     private String movieContent;
     private Integer episodes;
     @Column(name = "movie_schedule")
     private Integer movieSchedule;
     private String image;
     @ManyToOne
-    @JoinColumn(name = "countryId")
+    @JoinColumn(name = "country_id")
     private Country country;
     private  float star;
     private Integer price;

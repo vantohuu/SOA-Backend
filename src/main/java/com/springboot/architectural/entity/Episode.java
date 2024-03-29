@@ -4,11 +4,13 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.sql.Date;
 
 @Entity
 @Data
+@ToString
 @Table(name = "Episode")
 @NoArgsConstructor
 @AllArgsConstructor

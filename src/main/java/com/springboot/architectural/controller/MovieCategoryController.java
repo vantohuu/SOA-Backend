@@ -1,6 +1,7 @@
 package com.springboot.architectural.controller;
 
 import com.springboot.architectural.dto.Movie_CategoryDTO;
+import com.springboot.architectural.dto.PersonDTO;
 import com.springboot.architectural.payload.ResponseData;
 import com.springboot.architectural.service.MovieCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,12 +45,11 @@ public class MovieCategoryController {
         Movie_CategoryDTO r = movieCategoryService.add(movieCategoryDTO);
         responseData.setData(r);
         responseData.setDesc("Create successfully");
-
         if (r == null)
         {
             responseData.setDesc("Create failed");
-
             responseData.setSuccess(false);
+            return new ResponseEntity<>(responseData.getData(), HttpStatus.CONFLICT);
         }
         return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
@@ -62,7 +62,7 @@ public class MovieCategoryController {
         {
             responseData.setSuccess(false);
             responseData.setDesc("Update failed");
-            return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
+            return new ResponseEntity<>(responseData.getData(), HttpStatus.NOT_FOUND);
         }
         responseData.setData(movieCategoryService.update(movieCategoryDTO));
         responseData.setDesc("Update successfully");
