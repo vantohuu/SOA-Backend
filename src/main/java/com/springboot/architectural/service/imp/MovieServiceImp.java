@@ -96,4 +96,17 @@ public class MovieServiceImp implements MovieService {
         movieRepository.save(movie.get());
         return fileService.save(multipartFile);
     }
+
+
+    @Override
+    public List<MovieDTO> getPhimBo() {
+        List<Movie> movies =  movieRepository.findTop10ByEpisodesGreaterThanOrderByMovieIdDesc(1);;
+        return movies.stream().map(MovieMapper.INSTANCE::movieToMovieDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<MovieDTO> getPhimLe() {
+        List<Movie> movies =  movieRepository.findTop10ByEpisodesOrderByMovieIdDesc(1);;
+        return movies.stream().map(MovieMapper.INSTANCE::movieToMovieDto).collect(Collectors.toList());
+    }
 }

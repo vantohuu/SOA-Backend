@@ -17,4 +17,8 @@ public interface MovieService {
     MovieDTO update(MovieDTO movieDTO);
     boolean delete(Integer id);
     boolean uploadImg(MultipartFile multipartFile, Integer movie_id);
+
+    List<MovieDTO> getPhimBo();
+
+    List<MovieDTO> getPhimLe();
 }

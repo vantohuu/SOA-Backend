@@ -21,4 +21,8 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
     public List<Movie> getAllByTopNewMovie(Integer top);
 
 
+    public List<Movie> findTop10ByEpisodesGreaterThanOrderByMovieIdDesc(int episodes) ;
+
+    public List<Movie > findTop10ByEpisodesOrderByMovieIdDesc(int episodes);
+
 }

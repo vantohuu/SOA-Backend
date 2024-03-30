@@ -54,6 +54,31 @@ public class MovieController {
         return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
 
+    @GetMapping("/get-phim-trang-chu/{loaiPhim}")
+    public ResponseEntity<?> getPhimTrangChu(@PathVariable(name = "loaiPhim") String loaiPhim) {
+        ResponseData responseData = new ResponseData();
+
+        if (loaiPhim.equals("le")) {
+            if (movieService.getPhimLe() == null) {
+                responseData.setSuccess(false);
+                responseData.setDesc("Not Found Movie");
+                return new ResponseEntity<>(responseData.getData(), HttpStatus.NOT_FOUND);
+            }
+            responseData.setData(movieService.getPhimLe());
+            responseData.setDesc("Get movie successfully");
+        } else if (loaiPhim.equals("bo")) {
+            if (movieService.getPhimBo() == null) {
+                responseData.setSuccess(false);
+                responseData.setDesc("Not Found Movie");
+                return new ResponseEntity<>(responseData.getData(), HttpStatus.NOT_FOUND);
+            }
+            responseData.setData(movieService.getPhimBo());
+            responseData.setDesc("Get movie successfully");
+        } else if (loaiPhim.equals("moi")) {
+        }
+        return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
+    }
+
     @PostMapping("/create")
     public ResponseEntity<?> createRoom(@RequestBody MovieDTO movie){
         ResponseData responseData = new ResponseData();
