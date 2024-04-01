@@ -14,7 +14,7 @@ import java.sql.Date;
 public class PersonDTO {
     private Integer personId;
     private String name;
-    private Integer gender;
+    private Boolean gender;
     private Date dayOfBirth;
     private String image;
     private String describe;

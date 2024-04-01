@@ -20,7 +20,7 @@ public class Person {
     @Column(name = "person_id")
     private Integer personId;
     private String name;
-    private Integer gender;
+    private Boolean gender;
     @Column(name = "day_of_birth")
     private Date dayOfBirth;
     private String image;
