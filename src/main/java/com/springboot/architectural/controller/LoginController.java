@@ -1,5 +1,6 @@
 package com.springboot.architectural.controller;
 
+import com.springboot.architectural.payload.Request.ChangePassRequest;
 import com.springboot.architectural.payload.Request.SignInRequest;
 import com.springboot.architectural.payload.Request.SignUpRequest;
 import com.springboot.architectural.payload.ResponseData;
@@ -17,10 +18,15 @@ public class LoginController {
     private LoginService loginService;
 
 
+
+
     @PostMapping("/signup")
-    public ResponseEntity<?> signup(@RequestBody SignUpRequest signUpRequest){
+    public ResponseEntity<?> signup(@RequestBody SignUpRequest signUpRequest) {
         ResponseData responseData = new ResponseData();
-        responseData.setData(loginService.addUser(signUpRequest));
+        responseData.setData(loginService.addUserCustomer(signUpRequest));
+        if (responseData.getData().equals(false)) {
+            return new ResponseEntity<>(responseData.getData(), HttpStatus.CONFLICT);
+        }
         return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
 
@@ -35,8 +41,31 @@ public class LoginController {
         } else {
             responseData.setData("");
             responseData.setSuccess(false);
-        }
+            return new ResponseEntity<>(responseData.getData(), HttpStatus.NOT_FOUND);
 
+        }
         return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
+
+    @GetMapping("/verify-account")
+    public ResponseEntity<String> verifyAccount(@RequestParam String email,
+                                                @RequestParam String otp,
+                                                @RequestParam(defaultValue = "") String newPass,
+                                                @RequestParam String roleId
+    ) {
+        return new ResponseEntity<>(loginService.verifyAccount(email, otp, newPass, roleId), HttpStatus.OK);
+    }
+    @PutMapping("/regenerate-otp")
+    public ResponseEntity<String> regenerateOtp(@RequestParam String email,
+                                                @RequestParam String username,
+                                                @RequestParam String roleId,
+                                                @RequestParam(defaultValue = "") String password) {
+        return new ResponseEntity<>(loginService.regenerateOtp(username, email,password, roleId), HttpStatus.OK);
+    }
+    @PutMapping("/change-pass-otp")
+    public ResponseEntity<String> regenerateOtp(@RequestBody ChangePassRequest changePassRequest) {
+        return new ResponseEntity<>(loginService.changePassByOTP(changePassRequest).toString(), HttpStatus.OK);
+    }
+
+
 }

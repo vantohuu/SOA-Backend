@@ -8,7 +8,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-03-29T23:36:57+0700",
+    date = "2024-04-01T22:51:05+0700",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 17.0.10 (Amazon.com Inc.)"
 )
 public class MovieUserMapperImpl implements MovieUserMapper {
@@ -21,6 +21,7 @@ public class MovieUserMapperImpl implements MovieUserMapper {
 
         Movie_UserDTO movie_UserDTO = new Movie_UserDTO();
 
+        movie_UserDTO.setRoleId( movieUserRoleRoleId( movieUser ) );
         movie_UserDTO.setUsername( movieUser.getUsername() );
         movie_UserDTO.setPassword( movieUser.getPassword() );
         movie_UserDTO.setName( movieUser.getName() );
@@ -49,6 +50,21 @@ public class MovieUserMapperImpl implements MovieUserMapper {
         movie_User.setRole( roleDTOToRole( movieUserDTO.getRole() ) );
 
         return movie_User;
+    }
+
+    private Integer movieUserRoleRoleId(Movie_User movie_User) {
+        if ( movie_User == null ) {
+            return null;
+        }
+        Role role = movie_User.getRole();
+        if ( role == null ) {
+            return null;
+        }
+        Integer roleId = role.getRoleId();
+        if ( roleId == null ) {
+            return null;
+        }
+        return roleId;
     }
 
     protected RoleDTO roleToRoleDTO(Role role) {

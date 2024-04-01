@@ -12,6 +12,7 @@ import com.springboot.architectural.service.MovieUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -31,6 +32,9 @@ public class MovieUserServiceImp implements MovieUserService {
     @Autowired
     private FileService fileService;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
 
     @Override
     public Movie_UserDTO getById(String username) {
@@ -49,7 +53,8 @@ public class MovieUserServiceImp implements MovieUserService {
     @Override
     public Movie_UserDTO add(Movie_UserDTO movieDTO) {
         Movie_User entity = MovieUserMapper.INSTANCE.movieUserDtoToMovieUser(movieDTO);
-        entity.setRole(roleRepository.findById(entity.getRole().getRoleId()).orElse(null));
+        entity.setRole(roleRepository.findById(movieDTO.getRoleId()).orElse(null));
+        entity.setPassword(passwordEncoder.encode(movieDTO.getPassword()));
         if (entity.getRole() == null) return  null;
         return  MovieUserMapper.INSTANCE.movieUserToMovieUserDto(movieUserRepository.save(entity));
     }

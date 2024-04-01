@@ -1,8 +1,11 @@
 package com.springboot.architectural.controller;
 
 import com.springboot.architectural.dto.Movie_UserDTO;
+import com.springboot.architectural.payload.Request.ChangePassRequest;
 import com.springboot.architectural.payload.ResponseData;
+import com.springboot.architectural.service.LoginService;
 import com.springboot.architectural.service.MovieUserService;
+import lombok.EqualsAndHashCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,8 +18,10 @@ import org.springframework.web.multipart.MultipartFile;
 public class MovieUserController {
     @Autowired
     MovieUserService movieUserService;
+    @Autowired
+    LoginService loginService;
     @GetMapping("/{id}")
-    public ResponseEntity<?> getRoom(@PathVariable(name = "id") String id){
+    public ResponseEntity<?> getMovieUser(@PathVariable(name = "id") String id){
         ResponseData responseData = new ResponseData();
         if (movieUserService.getById(id) == null)
         {
@@ -38,8 +43,15 @@ public class MovieUserController {
         responseData.setData(movieUserService.getAll(searchContent, sortField, typeSort));
         return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
+    @PostMapping("/change-pass")
+    public ResponseEntity<?> changePass(@RequestBody ChangePassRequest changePassRequest){
+        ResponseData responseData = new ResponseData();
+        responseData.setData(loginService.changePassByOldPass(changePassRequest));
+        responseData.setDesc("Change pass movieUser successfully");
+        return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
+    }
     @PostMapping("/create")
-    public ResponseEntity<?> createRoom(@RequestBody Movie_UserDTO movieUserDTO){
+    public ResponseEntity<?> create(@RequestBody Movie_UserDTO movieUserDTO){
         ResponseData responseData = new ResponseData();
         responseData.setData(movieUserService.add(movieUserDTO));
         responseData.setDesc("Create movieUser successfully");

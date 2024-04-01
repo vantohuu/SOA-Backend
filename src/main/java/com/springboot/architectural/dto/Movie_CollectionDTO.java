@@ -19,5 +19,6 @@ public class Movie_CollectionDTO {
     private String imageMovie;
     private String username;
     private Date time;
+//    private MovieDTO movie;
 
 }

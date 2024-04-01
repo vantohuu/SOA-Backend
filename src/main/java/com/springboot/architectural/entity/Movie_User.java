@@ -1,11 +1,10 @@
 package com.springboot.architectural.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -13,6 +12,8 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 @ToString
 public class Movie_User {
     @Id
@@ -25,4 +26,6 @@ public class Movie_User {
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
+
+
 }

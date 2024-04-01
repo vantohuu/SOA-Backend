@@ -1,5 +1,6 @@
 package com.springboot.architectural.service;
 
+import com.springboot.architectural.payload.Request.ChangePassRequest;
 import com.springboot.architectural.payload.Request.SignUpRequest;
 
 public interface LoginService {
@@ -7,4 +8,11 @@ public interface LoginService {
     boolean checkLogin(String userName, String password);
 
     String login(String userName, String password);
+    String regenerateOtp(String username, String email, String password,String roleId);
+    String verifyAccount(String email, String otp, String newPass, String roleId);
+
+    Boolean changePassByOldPass(ChangePassRequest changePassRequest);
+    Boolean changePassByOTP(ChangePassRequest changePassRequest);
+    Boolean addUserCustomer(SignUpRequest signUpRequest);
+
 }
