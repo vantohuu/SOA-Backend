@@ -34,9 +34,10 @@ public class LoginController {
     public ResponseEntity<?> signin(@RequestBody SignInRequest signInRequest) {
         String username =signInRequest.getUsername();
         String password = signInRequest.getPassword();
+        String email = signInRequest.getEmail();
         ResponseData responseData = new ResponseData();
-        if(loginService.checkLogin(username, password)) {
-            String token = loginService.login(username, password);
+        if(loginService.checkLogin(username, email, password)) {
+            String token = loginService.login(username, email, password);
             responseData.setData(token);
         } else {
             responseData.setData("");
@@ -66,6 +67,5 @@ public class LoginController {
     public ResponseEntity<String> regenerateOtp(@RequestBody ChangePassRequest changePassRequest) {
         return new ResponseEntity<>(loginService.changePassByOTP(changePassRequest).toString(), HttpStatus.OK);
     }
-
 
 }

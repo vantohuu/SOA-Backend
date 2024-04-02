@@ -148,14 +148,16 @@ public class LoginServiceImp implements LoginService {
     }
 
     @Override
-    public boolean checkLogin(String userName, String password) {
-        Optional<Movie_User> account = movieUserRepository.findById(userName);
+    public boolean checkLogin(String userName,String email, String password) {
+        Optional<Movie_User> account = movieUserRepository.findByUsernameOrEmail(userName, email);
+        if (account.isEmpty()) return false;
         return  passwordEncoder.matches(password, account.get().getPassword());
     }
 
 
     @Override
-    public String login(String userName, String password) {
+    public String login(String userName, String email, String password) {
+        if (!email.isEmpty()) userName = movieUserRepository.findByEmail(email).get().getUsername();
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 userName, password
         ));
@@ -216,10 +218,10 @@ public class LoginServiceImp implements LoginService {
 
     public String verifyAccount(String email, String otp, String newPass, String roleId) {
         ConsentOtpRedis consentOtpRedis = consentOtpRedisRepository.findConsentOtpRedisById(otp, email);
-        System.out.println(consentOtpRedis + "99999999999999999999999999999999999");
+//        System.out.println(consentOtpRedis + "99999999999999999999999999999999999");
         if (consentOtpRedis == null) return "Please regenerate otp and try again";
         Optional<Movie_User> user = movieUserRepository.findByEmail(email);
-        if (newPass!=null)
+        if (!newPass.isEmpty())
         {
             if (user.isEmpty() || !Objects.equals(user.get().getUsername(), consentOtpRedis.getUsername())) return "Email is not match";
         }

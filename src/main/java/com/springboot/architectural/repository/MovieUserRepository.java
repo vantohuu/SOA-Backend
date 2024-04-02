@@ -13,4 +13,6 @@ public interface MovieUserRepository extends JpaRepository<Movie_User, String> {
     public List<Movie_User> findAllFilter(String searchContent, Sort pageable);
 
     public Optional<Movie_User> findByEmail(String email);
+
+    public Optional<Movie_User> findByUsernameOrEmail(String username, String email);
 }

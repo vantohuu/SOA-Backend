@@ -54,6 +54,13 @@ public class MovieController {
         return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
 
+    @GetMapping("/get-random")
+    public ResponseEntity<?> getRandom(@RequestParam(defaultValue = "") Integer top){
+        ResponseData responseData = new ResponseData();
+        responseData.setData(movieService.getRandomMovie(top));
+        return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
+    }
+
     @GetMapping("/get-phim-trang-chu/{loaiPhim}")
     public ResponseEntity<?> getPhimTrangChu(@PathVariable(name = "loaiPhim") String loaiPhim) {
         ResponseData responseData = new ResponseData();
@@ -76,6 +83,19 @@ public class MovieController {
             responseData.setDesc("Get movie successfully");
         } else if (loaiPhim.equals("moi")) {
         }
+        return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
+    }
+
+    @GetMapping("/get-page-by-category")
+    public ResponseEntity<?> getPageMovie(@RequestParam(defaultValue = "0") Integer offset,
+                                             @RequestParam(defaultValue = "0") Integer pageSize,
+                                             @RequestParam(defaultValue = "movieId") String field,
+                                             @RequestParam(defaultValue = "") String searchContent,
+                                             @RequestParam(defaultValue = "") Integer categoryId) {
+        ResponseData responseData = new ResponseData();
+        responseData.setData(movieService.findByCategoryWithPaginationAndSorting(searchContent,categoryId,offset,pageSize, field));
+        responseData.setSuccess(true);
+        responseData.setDesc("Get success");
         return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
 

@@ -1,6 +1,7 @@
 package com.springboot.architectural.service.imp;
 
 import com.springboot.architectural.dto.MovieDTO;
+import com.springboot.architectural.entity.Category;
 import com.springboot.architectural.entity.Country;
 import com.springboot.architectural.entity.Movie;
 import com.springboot.architectural.mapper.MovieMapper;
@@ -13,8 +14,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
@@ -109,4 +111,22 @@ public class MovieServiceImp implements MovieService {
         List<Movie> movies =  movieRepository.findTop10ByEpisodesOrderByMovieIdDesc(1);;
         return movies.stream().map(MovieMapper.INSTANCE::movieToMovieDto).collect(Collectors.toList());
     }
+    @Override
+    public List<MovieDTO> findAllWithPaginationAndSorting(String searchContent,int offset, int pageSize, String field){
+        Page<Movie> movies = movieRepository.findAll(PageRequest.of(offset, pageSize).withSort(Sort.by(field)));
+        return  movies.getContent().stream().map(MovieMapper.INSTANCE::movieToMovieDto).collect(Collectors.toList());
+    }
+    @Override
+    public List<MovieDTO> findByCategoryWithPaginationAndSorting(String searchContent,Integer category_id,int offset, int pageSize, String field){
+        Page<Movie> movies = movieRepository.paginationAndSortingByCategory(searchContent,category_id, PageRequest.of(offset, pageSize).withSort(Sort.by(field)));
+        return  movies.getContent().stream().map(MovieMapper.INSTANCE::movieToMovieDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<MovieDTO> getRandomMovie(Integer top)
+    {
+        List<Movie> movies =  movieRepository.findRandomMovie(top);;
+        return movies.stream().map(MovieMapper.INSTANCE::movieToMovieDto).collect(Collectors.toList());
+    }
+
 }
