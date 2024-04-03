@@ -5,10 +5,13 @@ import com.springboot.architectural.payload.Request.SignInRequest;
 import com.springboot.architectural.payload.Request.SignUpRequest;
 import com.springboot.architectural.payload.ResponseData;
 import com.springboot.architectural.service.LoginService;
+import netscape.javascript.JSObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Collections;
 
 @RestController
 @RequestMapping("/api/login")
@@ -45,7 +48,7 @@ public class LoginController {
             return new ResponseEntity<>(responseData.getData(), HttpStatus.NOT_FOUND);
 
         }
-        return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
+        return new ResponseEntity<>(Collections.singletonMap("token", responseData.getData()), HttpStatus.OK);
     }
 
     @GetMapping("/verify-account")
