@@ -167,10 +167,10 @@ public class LoginServiceImp implements LoginService {
         return token;
     }
     public Boolean changePassByOldPass (ChangePassRequest changePassRequest) {
+        System.out.println(changePassRequest);
         Optional<Movie_User> account = movieUserRepository.findById(changePassRequest.getUsername());
         if (account.isEmpty()) return false;
-        String passwordEncode = passwordEncoder.encode(changePassRequest.getPassword());
-        if (passwordEncode !=account.get().getPassword()) return false;
+        if (!passwordEncoder.matches(changePassRequest.getPassword(), account.get().getPassword())) return false;
         String newPasswordEncode = passwordEncoder.encode(changePassRequest.getNewPassword());
         account.get().setPassword(newPasswordEncode);
         movieUserRepository.save(account.get());
