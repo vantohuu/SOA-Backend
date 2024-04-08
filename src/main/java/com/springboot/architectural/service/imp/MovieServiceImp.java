@@ -113,12 +113,18 @@ public class MovieServiceImp implements MovieService {
     }
     @Override
     public List<MovieDTO> findAllWithPaginationAndSorting(String searchContent,int offset, int pageSize, String field){
-        Page<Movie> movies = movieRepository.findAll(PageRequest.of(offset, pageSize).withSort(Sort.by(field)));
+        Page<Movie> movies = movieRepository.findAll(PageRequest.of(offset, pageSize).withSort(Sort.by(field).descending()));
         return  movies.getContent().stream().map(MovieMapper.INSTANCE::movieToMovieDto).collect(Collectors.toList());
     }
     @Override
     public List<MovieDTO> findByCategoryWithPaginationAndSorting(String searchContent,Integer category_id,int offset, int pageSize, String field){
-        Page<Movie> movies = movieRepository.paginationAndSortingByCategory(searchContent,category_id, PageRequest.of(offset, pageSize).withSort(Sort.by(field)));
+        Page<Movie> movies = movieRepository.paginationAndSortingByCategory(searchContent,category_id, PageRequest.of(offset, pageSize).withSort(Sort.by(field).descending()));
+        return  movies.getContent().stream().map(MovieMapper.INSTANCE::movieToMovieDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<MovieDTO> findByCountryWithPaginationAndSorting(String searchContent,Integer country_id,int offset, int pageSize, String field){
+        Page<Movie> movies = movieRepository.paginationAndSortingByCountry(searchContent,country_id, PageRequest.of(offset, pageSize).withSort(Sort.by(field).descending()));
         return  movies.getContent().stream().map(MovieMapper.INSTANCE::movieToMovieDto).collect(Collectors.toList());
     }
 

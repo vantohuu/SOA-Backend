@@ -24,6 +24,7 @@ public interface MovieService {
     public List<MovieDTO> findAllWithPaginationAndSorting(String searchContent, int offset, int pageSize, String field);
 
     public List<MovieDTO> findByCategoryWithPaginationAndSorting(String searchContent,Integer category_id,int offset, int pageSize, String field);
+    public List<MovieDTO> findByCountryWithPaginationAndSorting(String searchContent,Integer category_id,int offset, int pageSize, String field);
 
     public List<MovieDTO> getRandomMovie(Integer top);
 

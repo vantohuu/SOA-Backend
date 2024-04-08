@@ -26,6 +26,9 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
             "join movie.categories category \n" +
             "WHERE CONCAT(movie.id, ' ', movie.name) LIKE %?1% and category.categoryId = ?2 ")
     public Page<Movie> paginationAndSortingByCategory(String searchContent, Integer category_id,  PageRequest pageRequest);
+    @Query("SELECT movie FROM Movie movie " +
+            "WHERE CONCAT(movie.id, ' ', movie.name) LIKE %?1% and movie.country.countryId = ?2 ")
+    public Page<Movie> paginationAndSortingByCountry(String searchContent, Integer countryId,  PageRequest pageRequest);
     public List<Movie> findTop10ByEpisodesGreaterThanOrderByMovieIdDesc(int episodes) ;
 
     public List<Movie > findTop10ByEpisodesOrderByMovieIdDesc(int episodes);

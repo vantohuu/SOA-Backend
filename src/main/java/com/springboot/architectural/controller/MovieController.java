@@ -87,13 +87,25 @@ public class MovieController {
     }
 
     @GetMapping("/get-page-by-category")
-    public ResponseEntity<?> getPageMovie(@RequestParam(defaultValue = "0") Integer offset,
+    public ResponseEntity<?> getPageMovieByCategory(@RequestParam(defaultValue = "0") Integer offset,
                                              @RequestParam(defaultValue = "0") Integer pageSize,
                                              @RequestParam(defaultValue = "movieId") String field,
                                              @RequestParam(defaultValue = "") String searchContent,
                                              @RequestParam(defaultValue = "") Integer categoryId) {
         ResponseData responseData = new ResponseData();
         responseData.setData(movieService.findByCategoryWithPaginationAndSorting(searchContent,categoryId,offset,pageSize, field));
+        responseData.setSuccess(true);
+        responseData.setDesc("Get success");
+        return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
+    }
+    @GetMapping("/get-page-by-country")
+    public ResponseEntity<?> getPageMovieByCountry(@RequestParam(defaultValue = "0") Integer offset,
+                                          @RequestParam(defaultValue = "0") Integer pageSize,
+                                          @RequestParam(defaultValue = "movieId") String field,
+                                          @RequestParam(defaultValue = "") String searchContent,
+                                          @RequestParam(defaultValue = "") Integer countryId) {
+        ResponseData responseData = new ResponseData();
+        responseData.setData(movieService.findByCountryWithPaginationAndSorting(searchContent,countryId,offset,pageSize, field));
         responseData.setSuccess(true);
         responseData.setDesc("Get success");
         return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
