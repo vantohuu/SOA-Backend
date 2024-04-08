@@ -82,6 +82,13 @@ public class MovieController {
             responseData.setData(movieService.getPhimBo());
             responseData.setDesc("Get movie successfully");
         } else if (loaiPhim.equals("moi")) {
+              if (movieService.getAllByTopNewMovie(10) == null) {
+                responseData.setSuccess(false);
+                responseData.setDesc("Not Found Movie");
+                return new ResponseEntity<>(responseData.getData(), HttpStatus.NOT_FOUND);
+            }
+            responseData.setData(movieService.getAllByTopNewMovie(10));
+            responseData.setDesc("Get movie successfully");
         }
         return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
