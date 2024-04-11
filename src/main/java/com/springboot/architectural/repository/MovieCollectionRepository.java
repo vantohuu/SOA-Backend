@@ -6,9 +6,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface MovieCollectionRepository extends JpaRepository<Movie_Collection, Integer> {
-    List<Movie_Collection> findByMovieAndMovieUser(Movie movie, Movie_User movieUser);
+    Optional<Movie_Collection> findByMovieAndMovieUser(Movie movie, Movie_User movieUser);
     List<Movie_Collection> findByMovieUser(Movie_User movieUser);
 
 }

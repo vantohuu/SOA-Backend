@@ -2,7 +2,6 @@ package com.springboot.architectural.service.imp;
 
 import com.springboot.architectural.dto.Movie_CollectionDTO;
 import com.springboot.architectural.entity.*;
-import com.springboot.architectural.mapper.MovieCategoryMapper;
 import com.springboot.architectural.mapper.MovieCollectionMapper;
 import com.springboot.architectural.repository.*;
 import com.springboot.architectural.service.MovieCollectionService;
@@ -91,7 +90,20 @@ public class MovieCollectionServiceImp implements MovieCollectionService {
         Optional<Movie> movie = movieRepository.findById(movieId);
         Optional<Movie_User> user = movieUserRepository.findById(username);
         if (movie.isEmpty() || user.isEmpty()) return false;
-        List<Movie_Collection> movieCollection = movieCollectionRepository.findByMovieAndMovieUser(movie.get(), user.get());
+        Optional<Movie_Collection> movieCollection = movieCollectionRepository.findByMovieAndMovieUser(movie.get(), user.get());
         return !movieCollection.isEmpty();
+    }
+
+
+    @Override
+    public boolean deleteCollectionByMovieAndUser(Integer movieId, String username) {
+        if (movieId == null || username == null) return false;
+        Optional<Movie> movie = movieRepository.findById(movieId);
+        Optional<Movie_User> user = movieUserRepository.findById(username);
+        if (movie.isEmpty() || user.isEmpty()) return false;
+        Optional<Movie_Collection> movieCollection = movieCollectionRepository.findByMovieAndMovieUser(movie.get(), user.get());
+        if (movieCollection.isEmpty()) return false;
+        movieCollectionRepository.deleteById(movieCollection.get().getId());
+        return true;
     }
 }

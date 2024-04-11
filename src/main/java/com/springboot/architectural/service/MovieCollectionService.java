@@ -14,4 +14,6 @@ public interface MovieCollectionService {
     boolean delete(Integer id);
 
     boolean checkMovieCollectionIsExists(Integer movieId, String username);
+
+    boolean deleteCollectionByMovieAndUser(Integer movieId, String username);
 }

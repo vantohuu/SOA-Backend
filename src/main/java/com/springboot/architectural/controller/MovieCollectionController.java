@@ -2,6 +2,7 @@ package com.springboot.architectural.controller;
 
 import com.springboot.architectural.dto.Movie_CategoryDTO;
 import com.springboot.architectural.dto.Movie_CollectionDTO;
+import com.springboot.architectural.entity.Movie_Collection;
 import com.springboot.architectural.payload.ResponseData;
 import com.springboot.architectural.service.MovieCategoryService;
 import com.springboot.architectural.service.MovieCollectionService;
@@ -11,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.html.Option;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -97,11 +99,19 @@ public class MovieCollectionController {
 
         return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
+    @DeleteMapping("/delete-by-movie-and-user")
+    public ResponseEntity<?> deleteByMovieAndUser(@RequestParam Integer movieId, @RequestParam String username){
+        ResponseData responseData = new ResponseData();
+        boolean checkDeleted = movieCollectionService.deleteCollectionByMovieAndUser(movieId, username);
+        responseData.setData(checkDeleted);
+        responseData.setDesc("Delete successfully");
+        return new ResponseEntity<>(Collections.singletonMap("status",responseData.getData()), HttpStatus.OK);
+    }
     @GetMapping("check-exists-collection")
     public ResponseEntity<?> check(@RequestParam Integer movieId,@RequestParam String username ){
         ResponseData responseData = new ResponseData();
         responseData.setData(movieCollectionService.checkMovieCollectionIsExists(movieId, username));
-        responseData.setDesc("Delete successfully");
+        responseData.setDesc("check successfully");
         return new ResponseEntity<>(Collections.singletonMap("status", responseData.getData()), HttpStatus.OK);
     }
 }
