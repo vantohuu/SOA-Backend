@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.Date;
 
 @RestController
@@ -85,5 +86,12 @@ public class MovieCollectionController {
         responseData.setDesc("Delete successfully");
 
         return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
+    }
+    @GetMapping("check-exists-collection")
+    public ResponseEntity<?> check(@RequestParam Integer movieId,@RequestParam String username ){
+        ResponseData responseData = new ResponseData();
+        responseData.setData(movieCollectionService.checkMovieCollectionIsExists(movieId, username));
+        responseData.setDesc("Delete successfully");
+        return new ResponseEntity<>(Collections.singletonMap("data", responseData.getData()), HttpStatus.OK);
     }
 }

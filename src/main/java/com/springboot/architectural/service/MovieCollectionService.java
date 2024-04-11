@@ -12,4 +12,5 @@ public interface MovieCollectionService {
     Movie_CollectionDTO update(Movie_CollectionDTO movieCollectionDTO);
     boolean delete(Integer id);
 
+    boolean checkMovieCollectionIsExists(Integer movieId, String username);
 }

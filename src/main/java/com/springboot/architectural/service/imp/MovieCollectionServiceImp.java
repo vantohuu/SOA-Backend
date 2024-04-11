@@ -46,6 +46,9 @@ public class MovieCollectionServiceImp implements MovieCollectionService {
         return  MovieCollectionMapper.INSTANCE.movieCollectionToMovieCollectionDto(movieCollectionRepository.save(entity));
     }
 
+
+
+
     @Override
     public Movie_CollectionDTO update(Movie_CollectionDTO movieCollectionDTO) {
         System.out.println(movieCollectionDTO);
@@ -73,5 +76,13 @@ public class MovieCollectionServiceImp implements MovieCollectionService {
         return false;
     }
 
-
+    @Override
+    public boolean checkMovieCollectionIsExists(Integer movieId, String username) {
+        if (movieId == null || username == null) return false;
+        Optional<Movie> movie = movieRepository.findById(movieId);
+        Optional<Movie_User> user = movieUserRepository.findById(username);
+        if (movie.isEmpty() || user.isEmpty()) return false;
+        List<Movie_Collection> movieCollection = movieCollectionRepository.findByMovieAndMovieUser(movie.get(), user.get());
+        return !movieCollection.isEmpty();
+    }
 }
