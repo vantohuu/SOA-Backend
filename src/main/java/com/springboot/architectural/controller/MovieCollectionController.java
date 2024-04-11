@@ -102,6 +102,6 @@ public class MovieCollectionController {
         ResponseData responseData = new ResponseData();
         responseData.setData(movieCollectionService.checkMovieCollectionIsExists(movieId, username));
         responseData.setDesc("Delete successfully");
-        return new ResponseEntity<>(Collections.singletonMap("data", responseData.getData()), HttpStatus.OK);
+        return new ResponseEntity<>(Collections.singletonMap("status", responseData.getData()), HttpStatus.OK);
     }
 }
