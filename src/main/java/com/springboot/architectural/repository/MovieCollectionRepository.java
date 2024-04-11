@@ -9,5 +9,6 @@ import java.util.List;
 
 public interface MovieCollectionRepository extends JpaRepository<Movie_Collection, Integer> {
     List<Movie_Collection> findByMovieAndMovieUser(Movie movie, Movie_User movieUser);
+    List<Movie_Collection> findByMovieUser(Movie_User movieUser);
 
 }

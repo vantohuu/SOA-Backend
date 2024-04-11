@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/movie-collection")
@@ -39,6 +40,15 @@ public class MovieCollectionController {
         ResponseData responseData = new ResponseData();
         responseData.setData(movieCollectionService.getAll());
         responseData.setDesc("Get all successfully");
+        return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
+    }
+    @GetMapping("/get-all-by-user")
+    public ResponseEntity<?> getAllByUser(@RequestParam String username){
+        ResponseData responseData = new ResponseData();
+        List<Movie_CollectionDTO> list = movieCollectionService.getAllByMovieUser(username);
+        if (list.isEmpty())   return new ResponseEntity<>(Collections.singletonMap("data", list), HttpStatus.NOT_FOUND);
+        responseData.setData(list);
+        responseData.setDesc("Get all by username successfully");
         return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
     @PostMapping("/create")

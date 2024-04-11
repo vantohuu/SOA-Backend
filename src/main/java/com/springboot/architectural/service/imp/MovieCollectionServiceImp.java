@@ -34,6 +34,15 @@ public class MovieCollectionServiceImp implements MovieCollectionService {
     }
 
     @Override
+    public List<Movie_CollectionDTO> getAllByMovieUser(String username) {
+        if (username == null) return  null;
+        Optional<Movie_User> movieUser = movieUserRepository.findById(username);
+        if (movieUser.isEmpty()) return  null;
+        List<Movie_Collection> list = movieCollectionRepository.findByMovieUser(movieUser.get());
+        return list.stream().map(MovieCollectionMapper.INSTANCE::movieCollectionToMovieCollectionDto).collect(Collectors.toList());
+    }
+
+    @Override
     public Movie_CollectionDTO add(Movie_CollectionDTO movieCollectionDTO) {
         Movie_Collection entity = MovieCollectionMapper.INSTANCE.movieCollectionDtoToMovieCollection(movieCollectionDTO);
         if (movieCollectionDTO.getMovieId() == null || movieCollectionDTO.getUsername()== null  ) return null;
