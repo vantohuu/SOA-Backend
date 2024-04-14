@@ -13,6 +13,7 @@ import com.springboot.architectural.repository.PersonRepository;
 import com.springboot.architectural.service.FileService;
 import com.springboot.architectural.service.MovieService;
 import com.springboot.architectural.service.PersonService;
+import com.springboot.architectural.service.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Sort;
@@ -34,6 +35,8 @@ public class PersonServiceImp implements PersonService {
     private CountryRepository countryRepository;
     @Autowired
     private FileService fileService;
+    @Autowired
+    StorageService storageService;
     @Override
     public PersonDTO getById(Integer id) {
         Optional<Person> entity = personRepository.findById(id);
@@ -84,9 +87,9 @@ public class PersonServiceImp implements PersonService {
     public boolean uploadImg(MultipartFile multipartFile, Integer id) {
         Optional<Person> p = personRepository.findById(id);
         if (p.isEmpty()) return  false;
-        String url =  rootPatch + "/" + multipartFile.getOriginalFilename();
+        String url =  storageService.uploadFile(multipartFile);
         p.get().setImage(url);
         personRepository.save(p.get());
-        return fileService.save(multipartFile);
+        return true;
     }
 }

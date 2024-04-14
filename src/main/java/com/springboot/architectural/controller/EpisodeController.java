@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/api/episode")
@@ -69,4 +70,20 @@ public class EpisodeController {
         responseData.setDesc("Delete episode successfully");
         return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
+    @PostMapping("/upload")
+    public ResponseEntity<?> deleteRoom(@RequestParam(name = "fileUpload") MultipartFile multipartFile, @RequestParam(name= "id")Integer id){
+        ResponseData responseData = new ResponseData();
+        if (episodeService.uploadVideo(multipartFile, id))
+        {
+            responseData.setData(true);
+            responseData.setDesc("Upload person successfully");
+        }
+        else
+        {
+            responseData.setData(false);
+            responseData.setDesc("Upload failed");
+        }
+        return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
+    }
+
 }

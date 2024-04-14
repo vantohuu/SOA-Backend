@@ -9,6 +9,7 @@ import com.springboot.architectural.repository.RoleRepository;
 import com.springboot.architectural.security.JwtTokenProvider;
 import com.springboot.architectural.service.FileService;
 import com.springboot.architectural.service.MovieUserService;
+import com.springboot.architectural.service.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Sort;
@@ -30,7 +31,7 @@ public class MovieUserServiceImp implements MovieUserService {
     @Autowired
     private RoleRepository roleRepository;
     @Autowired
-    private FileService fileService;
+    private StorageService storageService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -85,9 +86,9 @@ public class MovieUserServiceImp implements MovieUserService {
     public boolean uploadImg(MultipartFile multipartFile, String username) {
         Optional<Movie_User> movie_user = movieUserRepository.findById(username);
         if (username.isEmpty()) return  false;
-        String url =  rootPatch + "/" + multipartFile.getOriginalFilename();
+        String url =  storageService.uploadFile(multipartFile);
         movie_user.get().setAvatar(url);
         movieUserRepository.save(movie_user.get());
-        return fileService.save(multipartFile);
+        return true;
     }
 }

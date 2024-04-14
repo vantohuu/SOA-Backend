@@ -9,6 +9,7 @@ import com.springboot.architectural.repository.CountryRepository;
 import com.springboot.architectural.repository.MovieRepository;
 import com.springboot.architectural.service.FileService;
 import com.springboot.architectural.service.MovieService;
+import com.springboot.architectural.service.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Sort;
@@ -31,7 +32,7 @@ public class MovieServiceImp implements MovieService {
     @Autowired
     private CountryRepository countryRepository;
     @Autowired
-    private FileService fileService;
+    private StorageService storageService;
     @Override
     public MovieDTO getById(Integer id) {
         Optional<Movie> entity = movieRepository.findById(id);
@@ -93,10 +94,10 @@ public class MovieServiceImp implements MovieService {
     public boolean uploadImg(MultipartFile multipartFile, Integer id) {
         Optional<Movie> movie = movieRepository.findById(id);
         if (movie.isEmpty()) return  false;
-        String url =  rootPatch + "/" + multipartFile.getOriginalFilename();
+        String url =  storageService.uploadFile(multipartFile);
         movie.get().setImage(url);
         movieRepository.save(movie.get());
-        return fileService.save(multipartFile);
+        return true;
     }
 
 

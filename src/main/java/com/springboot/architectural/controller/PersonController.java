@@ -80,9 +80,9 @@ public class PersonController {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<?> deleteRoom(@RequestParam(name = "fileUpload")MultipartFile multipartFile, @RequestParam(name= "room_id")Integer room_id){
+    public ResponseEntity<?> deleteRoom(@RequestParam(name = "fileUpload")MultipartFile multipartFile, @RequestParam(name= "personId")Integer personId){
         ResponseData responseData = new ResponseData();
-        if (personService.uploadImg(multipartFile, room_id))
+        if (personService.uploadImg(multipartFile, personId))
         {
             responseData.setData(true);
             responseData.setDesc("Upload person successfully");

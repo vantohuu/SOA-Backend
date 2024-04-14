@@ -7,8 +7,10 @@ import com.springboot.architectural.mapper.EpisodeMapper;
 import com.springboot.architectural.repository.EpisodeRepository;
 import com.springboot.architectural.repository.MovieRepository;
 import com.springboot.architectural.service.EpisodeService;
+import com.springboot.architectural.service.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,7 +23,8 @@ public class EpisodeServiceImp implements EpisodeService {
     @Autowired
     private MovieRepository movieRepository;
 
-
+    @Autowired
+    private StorageService storageService;
     @Override
     public EpisodeDTO getById(int id) {
         Optional<Episode> country = episodeRepository.findById(id);
@@ -64,4 +67,14 @@ public class EpisodeServiceImp implements EpisodeService {
         }
         return false;
     }
+    @Override
+    public boolean uploadVideo(MultipartFile multipartFile, Integer id) {
+        Optional<Episode> movie = episodeRepository.findById(id);
+        if (movie.isEmpty()) return  false;
+        String url =  storageService.uploadFile(multipartFile);
+        movie.get().setLink(url);
+        episodeRepository.save(movie.get());
+        return true;
+    }
+
 }

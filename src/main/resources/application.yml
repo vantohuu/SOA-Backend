@@ -1,0 +1,25 @@
+cloud:
+  aws:
+    credentials:
+      access-key: AKIA6C4ANBOZNF7GZJYT
+      secret-key: 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
+    region:
+      static: us-east-1
+    stack:
+      auto: false
+
+application:
+  bucket:
+    name: videosphim
+  cloudfront:
+    url: https://d2g4rgl51ql2fk.cloudfront.net
+
+spring:
+  servlet:
+    multipart:
+      enabled: true
+      max-request-size: 500MB
+      max-file-size: 500MB
+
+server:
+  port: 9090
