@@ -36,6 +36,19 @@ public class CommentController {
         responseData.setDesc("Get all successfully");
         return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
     }
+
+    @GetMapping("/get-page-by-movie")
+    public ResponseEntity<?> getPageCommentByMovie(@RequestParam(defaultValue = "0") Integer offset,
+                                                    @RequestParam(defaultValue = "0") Integer pageSize,
+                                                    @RequestParam(defaultValue = "idComment") String field,
+                                                    @RequestParam(defaultValue = "") String searchContent,
+                                                    @RequestParam(defaultValue = "") Integer movieId) {
+        ResponseData responseData = new ResponseData();
+        responseData.setData(commentService.findByMovieWithPaginationAndSorting(searchContent,movieId,offset,pageSize, field));
+        responseData.setSuccess(true);
+        responseData.setDesc("Get success");
+        return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
+    }
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody CommentDTO commentDTO){
         ResponseData responseData = new ResponseData();

@@ -7,7 +7,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-04-03T00:59:28+0700",
+    date = "2024-04-14T17:41:38+0700",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 17.0.10 (Amazon.com Inc.)"
 )
 public class EpisodeMapperImpl implements EpisodeMapper {

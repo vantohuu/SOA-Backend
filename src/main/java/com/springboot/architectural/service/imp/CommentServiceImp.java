@@ -5,10 +5,14 @@ import com.springboot.architectural.dto.HistoryDTO;
 import com.springboot.architectural.entity.*;
 import com.springboot.architectural.mapper.CommentMapper;
 import com.springboot.architectural.mapper.HistoryMapper;
+import com.springboot.architectural.mapper.MovieMapper;
 import com.springboot.architectural.repository.*;
 import com.springboot.architectural.service.CommentService;
 import com.springboot.architectural.service.HistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -61,6 +65,12 @@ public class CommentServiceImp implements CommentService {
         entity.setMovie(movie.get());
         entity.setMovieUser(movieUser.get());
         return  CommentMapper.INSTANCE.commentToCommentDto(commentRepository.save(entity));
+    }
+
+    @Override
+    public List<CommentDTO> findByMovieWithPaginationAndSorting(String searchContent, Integer movieId, int offset, int pageSize, String field) {
+        Page<Comment> comments = commentRepository.paginationAndSortingByMovie(searchContent,movieId, PageRequest.of(offset, pageSize).withSort(Sort.by(field).descending()));
+        return  comments.getContent().stream().map(CommentMapper.INSTANCE::commentToCommentDto).collect(Collectors.toList());
     }
 
     @Override
