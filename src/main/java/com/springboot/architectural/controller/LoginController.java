@@ -28,9 +28,9 @@ public class LoginController {
         ResponseData responseData = new ResponseData();
         responseData.setData(loginService.addUserCustomer(signUpRequest));
         if (responseData.getData().equals(false)) {
-            return new ResponseEntity<>(responseData.getData(), HttpStatus.CONFLICT);
+            return new ResponseEntity<>(Collections.singletonMap("status", responseData.getData()), HttpStatus.CONFLICT);
         }
-        return new ResponseEntity<>(responseData.getData(), HttpStatus.OK);
+        return new ResponseEntity<>(Collections.singletonMap("status", responseData.getData()), HttpStatus.OK);
     }
 
     @PostMapping("/signin")

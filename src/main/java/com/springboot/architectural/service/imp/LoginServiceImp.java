@@ -184,9 +184,6 @@ public class LoginServiceImp implements LoginService {
         try {
             ConsentOtpRedis consentOtpRedis = new ConsentOtpRedis(changePassRequest.getUsername(),changePassRequest.getEmail(),changePassRequest.getPassword(),otp);
             consentOtpRedisRepository.save(consentOtpRedis);
-//            account.get().setOtp(otp);
-//            account.get().setOtpGeneratedTime(LocalDateTime.now());
-//            movieUserRepository.save(account.get());
             emailUtil.sendOtpEmail(changePassRequest.getEmail(), otp, changePassRequest.getNewPassword(), changePassRequest.getRoleId());
         } catch (MessagingException e) {
             throw new RuntimeException("Unable to send otp please try again");

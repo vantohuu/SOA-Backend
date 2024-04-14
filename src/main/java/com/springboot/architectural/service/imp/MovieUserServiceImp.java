@@ -46,7 +46,7 @@ public class MovieUserServiceImp implements MovieUserService {
     public List<Movie_UserDTO> getAll(String searchContent,String sortField, String typeSort) {
         Sort sorted = Sort.by(sortField.isEmpty() ? "name" : sortField );
         sorted = typeSort.toUpperCase(Locale.ROOT).equals("DESC") ? sorted.descending() : sorted.ascending();
-        List<Movie_User> movieUsers =  movieUserRepository.findAllFilter(searchContent, sorted);;
+        List<Movie_User> movieUsers =  movieUserRepository.findAll();;
         return movieUsers.stream().map(MovieUserMapper.INSTANCE::movieUserToMovieUserDto).collect(Collectors.toList());
     }
 
