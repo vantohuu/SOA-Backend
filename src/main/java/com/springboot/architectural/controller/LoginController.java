@@ -19,18 +19,14 @@ public class LoginController {
 
     @Autowired
     private LoginService loginService;
-
-
-
-
     @PostMapping("/signup")
     public ResponseEntity<?> signup(@RequestBody SignUpRequest signUpRequest) {
         ResponseData responseData = new ResponseData();
         responseData.setData(loginService.addUserCustomer(signUpRequest));
         if (responseData.getData().equals(false)) {
-            return new ResponseEntity<>(Collections.singletonMap("status", responseData.getData()), HttpStatus.CONFLICT);
+            return new ResponseEntity<>(responseData, HttpStatus.CONFLICT);
         }
-        return new ResponseEntity<>(Collections.singletonMap("status", responseData.getData()), HttpStatus.OK);
+        return new ResponseEntity<>(responseData, HttpStatus.OK);
     }
 
     @PostMapping("/signin")
@@ -42,33 +38,40 @@ public class LoginController {
         if(loginService.checkLogin(username, email, password)) {
             String token = loginService.login(username, email, password);
             responseData.setData(token);
+            responseData.setSuccess(true);
         } else {
             responseData.setData("");
             responseData.setSuccess(false);
-            return new ResponseEntity<>(responseData.getData(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(responseData, HttpStatus.NOT_FOUND);
 
         }
-        return new ResponseEntity<>(Collections.singletonMap("token", responseData.getData()), HttpStatus.OK);
+        return new ResponseEntity<>(responseData, HttpStatus.OK);
     }
 
     @GetMapping("/verify-account")
-    public ResponseEntity<String> verifyAccount(@RequestParam String email,
+    public ResponseEntity<?> verifyAccount(@RequestParam String email,
                                                 @RequestParam String otp,
                                                 @RequestParam(defaultValue = "") String newPass,
                                                 @RequestParam String roleId
     ) {
-        return new ResponseEntity<>(loginService.verifyAccount(email, otp, newPass, roleId), HttpStatus.OK);
+        ResponseData responseData = new ResponseData();
+        responseData.setData(loginService.verifyAccount(email, otp, newPass, roleId));
+        return new ResponseEntity<>(responseData, HttpStatus.OK);
     }
     @PutMapping("/regenerate-otp")
-    public ResponseEntity<String> regenerateOtp(@RequestParam String email,
+    public ResponseEntity<?> regenerateOtp(@RequestParam String email,
                                                 @RequestParam String username,
                                                 @RequestParam String roleId,
                                                 @RequestParam(defaultValue = "") String password) {
-        return new ResponseEntity<>(loginService.regenerateOtp(username, email,password, roleId), HttpStatus.OK);
+        ResponseData responseData = new ResponseData();
+        responseData.setData(loginService.regenerateOtp(username, email,password, roleId));
+        return new ResponseEntity<>(responseData, HttpStatus.OK);
     }
     @PutMapping("/change-pass-otp")
-    public ResponseEntity<String> regenerateOtp(@RequestBody ChangePassRequest changePassRequest) {
-        return new ResponseEntity<>(loginService.changePassByOTP(changePassRequest).toString(), HttpStatus.OK);
+    public ResponseEntity<?> regenerateOtp(@RequestBody ChangePassRequest changePassRequest) {
+        ResponseData responseData = new ResponseData();
+        responseData.setData(loginService.changePassByOTP(changePassRequest));
+        return new ResponseEntity<>(responseData, HttpStatus.OK);
     }
 
 }
