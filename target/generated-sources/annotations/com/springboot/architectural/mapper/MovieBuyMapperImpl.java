@@ -9,8 +9,13 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
+<<<<<<< HEAD
     date = "2024-04-29T01:57:46+0700",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 17.0.10 (Oracle Corporation)"
+=======
+    date = "2024-04-16T14:06:58+0700",
+    comments = "version: 1.4.2.Final, compiler: javac, environment: Java 17.0.10 (Amazon.com Inc.)"
+>>>>>>> 4b03f1c2d76eae5d29f5e6dba65016b1ed5692b1
 )
 public class MovieBuyMapperImpl implements MovieBuyMapper {
 
