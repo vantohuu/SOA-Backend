@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Collections;
 
 @RestController
 @RequestMapping("/api/movie-user")
@@ -50,7 +49,7 @@ public class MovieUserController {
         ResponseData responseData = new ResponseData();
         responseData.setData(loginService.changePassByOldPass(changePassRequest));
         responseData.setDesc("Change pass movieUser successfully");
-        return new ResponseEntity<>(Collections.singletonMap("status",responseData), HttpStatus.OK);
+        return new ResponseEntity<>(responseData, HttpStatus.OK);
     }
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody Movie_UserDTO movieUserDTO){
