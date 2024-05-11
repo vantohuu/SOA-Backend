@@ -56,6 +56,14 @@ public class MovieServiceImp implements MovieService {
     }
 
     @Override
+    public List<MovieDTO> getAllByCountry(String searchContent, String sortField, String typeSort, Integer country_id) {
+        Sort sorted = Sort.by(sortField.isEmpty() ? "movieId" : sortField );
+        sorted = typeSort.toUpperCase(Locale.ROOT).equals("DESC") ? sorted.descending() : sorted.ascending();
+        List<Movie> movies =  movieRepository.findAllFilterByCountry(searchContent,country_id, sorted);;
+        return movies.stream().map(MovieMapper.INSTANCE::movieToMovieDto).collect(Collectors.toList());
+    }
+
+    @Override
     public List<MovieDTO> getAllByTopNewMovie(Integer top) {
         List<Movie> movies =  movieRepository.getAllByTopNewMovie(top);;
         return movies.stream().map(MovieMapper.INSTANCE::movieToMovieDto).collect(Collectors.toList());
