@@ -23,8 +23,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.time.Duration;
-import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -197,20 +195,20 @@ public class LoginServiceImp implements LoginService {
 //        movieUserRepository.save(account.get());
         return true;
     }
-    public String regenerateOtp(String username, String email, String password, String roleId) {
-        Optional<Movie_User> user = movieUserRepository.findByEmail(email);
-//        String deleteAccountsRedis = consentOtpRedisRepository.deleteAllAccountRedis(email);
-        String otp = otpUtil.generateOtp();
-        ConsentOtpRedis consentOtpRedis = new ConsentOtpRedis(username,email,password,otp);
-        try {
-            emailUtil.sendOtpEmail(email, otp, null, roleId);
-            consentOtpRedisRepository.save(consentOtpRedis);
-        } catch (MessagingException e) {
-            throw new RuntimeException("Unable to send otp please try again");
-        }
-        consentOtpRedisRepository.save(consentOtpRedis);
-        return "Email sent... please verify account within 2 minute";
-    }
+//    public Boolean regenerateOtp(String username, String email, String password, String roleId) {
+//        Optional<Movie_User> user = movieUserRepository.findByEmail(email);
+//        String otp = otpUtil.generateOtp();
+//        ConsentOtpRedis consentOtpRedis = new ConsentOtpRedis(username,email,password,otp);
+//        try {
+//            emailUtil.sendOtpEmail(email, otp, password, roleId);
+//            consentOtpRedisRepository.save(consentOtpRedis);
+//        } catch (MessagingException e) {
+//            throw new RuntimeException("Unable to send otp please try again");
+//        }
+//        consentOtpRedisRepository.save(consentOtpRedis);
+////        return "Email sent... please verify account within 2 minute";
+//        return true;
+//    }
 
 
     public String verifyAccount(String email, String otp, String newPass, String roleId) {

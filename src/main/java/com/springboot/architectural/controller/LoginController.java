@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Objects;
+
 
 @RestController
 @RequestMapping("/api/login")
@@ -54,20 +56,30 @@ public class LoginController {
                                                 @RequestParam String roleId
     ) {
         ResponseData responseData = new ResponseData();
-        responseData.setData(loginService.verifyAccount(email, otp, newPass, roleId));
+        String message =  loginService.verifyAccount(email, otp, newPass, roleId);
+        responseData.setDesc(message);
+        if (Objects.equals(message, "OTP verified you can login"))
+        {
+            responseData.setData(true);
+        }
+        else
+        {
+            responseData.setSuccess(false);
+            responseData.setData(false);
+        }
         return new ResponseEntity<>(responseData, HttpStatus.OK);
     }
-    @PutMapping("/regenerate-otp")
-    public ResponseEntity<?> regenerateOtp(@RequestParam String email,
-                                                @RequestParam String username,
-                                                @RequestParam String roleId,
-                                                @RequestParam(defaultValue = "") String password) {
-        ResponseData responseData = new ResponseData();
-        responseData.setData(loginService.regenerateOtp(username, email,password, roleId));
-        return new ResponseEntity<>(responseData, HttpStatus.OK);
-    }
+//    @PutMapping("/regenerate-otp")
+//    public ResponseEntity<?> regenerateOtp(@RequestParam String email,
+//                                                @RequestParam String username,
+//                                                @RequestParam String roleId,
+//                                                @RequestParam(defaultValue = "") String password) {
+//        ResponseData responseData = new ResponseData();
+//        responseData.setData(loginService.regenerateOtp(username, email,password, roleId));
+//        return new ResponseEntity<>(responseData, HttpStatus.OK);
+//    }
     @PutMapping("/change-pass-otp")
-    public ResponseEntity<?> regenerateOtp(@RequestBody ChangePassRequest changePassRequest) {
+    public ResponseEntity<?> changPassByOtp(@RequestBody ChangePassRequest changePassRequest) {
         ResponseData responseData = new ResponseData();
         responseData.setData(loginService.changePassByOTP(changePassRequest));
         return new ResponseEntity<>(responseData, HttpStatus.OK);

@@ -102,7 +102,4 @@ public class AdminMovieUserController {
         }
         return new ResponseEntity<>(responseData, HttpStatus.OK);
     }
-
-
-
 }

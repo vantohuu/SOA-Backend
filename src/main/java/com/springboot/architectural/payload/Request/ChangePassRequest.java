@@ -13,6 +13,4 @@ public class ChangePassRequest {
     private String newPassword;
     private String email;
     private String roleId;
-
-
 }
