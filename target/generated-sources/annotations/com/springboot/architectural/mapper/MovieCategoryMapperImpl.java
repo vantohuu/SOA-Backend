@@ -8,7 +8,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-05-13T07:35:54+0700",
+    date = "2024-05-13T20:41:28+0700",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 17.0.10 (Amazon.com Inc.)"
 )
 public class MovieCategoryMapperImpl implements MovieCategoryMapper {

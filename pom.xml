@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.2.1</version>
+		<version>3.1.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.springboot</groupId>
@@ -84,7 +84,7 @@
 		<dependency>
 			<groupId>redis.clients</groupId>
 			<artifactId>jedis</artifactId>
-			<version>5.0.0</version>
+			<version> 4.3.2</version>
 		</dependency>
 		<!--		<dependency>-->
 		<!--			<groupId>org.projectlombok</groupId>-->
@@ -159,6 +159,7 @@
 							<version>${version.mapstruct-lombok}</version>
 						</path>
 					</annotationProcessorPaths>
+
 				</configuration>
 
 			</plugin>
