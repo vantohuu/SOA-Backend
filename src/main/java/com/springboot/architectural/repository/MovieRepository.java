@@ -20,6 +20,11 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
             "WHERE CONCAT(movie.id, ' ', movie.name) LIKE %?1% and category.categoryId = ?2 ")
     public List<Movie> findAllFilterByCategory(String searchContent, Integer category_id, Sort pageable);
 
+    @Query("SELECT movie FROM Movie movie " +
+            "join movie.country \n" +
+            "WHERE CONCAT(movie.id, ' ', movie.name) LIKE %?1% and country.countryId = ?2 ")
+    public List<Movie> findAllFilterByCountry(String searchContent, Integer category_id, Sort pageable);
+
     @Query(value = "EXEC SelectTopMovie @t = ?1", nativeQuery = true)
     public List<Movie> getAllByTopNewMovie(Integer top);
     @Query("SELECT movie FROM Movie movie " +

@@ -11,6 +11,8 @@ public interface MovieService {
     MovieDTO getById(Integer id);
     List<MovieDTO> getAll(String searchContent,String sortField,  String typeSort);
     List<MovieDTO> getAllByCategory(String searchContent,String sortField, String typeSort, Integer category_id);
+
+    List<MovieDTO> getAllByCountry(String searchContent,String sortField, String typeSort, Integer country_id);
     List<MovieDTO> getAllByTopNewMovie(Integer top);
 
     MovieDTO add(MovieDTO movieDTO);

@@ -54,6 +54,16 @@ public class MovieController {
         return new ResponseEntity<>(responseData, HttpStatus.OK);
     }
 
+    @GetMapping("/get-all-by-country")
+    public ResponseEntity<?> getAllo(@RequestParam(defaultValue = "") String sortField,
+                                    @RequestParam(defaultValue = "DESC") String typeSort,
+                                    @RequestParam(defaultValue = "") String searchContent,
+                                    @RequestParam(defaultValue = "") Integer country_id){
+        ResponseData responseData = new ResponseData();
+        responseData.setData(movieService.getAllByCountry(searchContent, sortField, typeSort,country_id));
+        return new ResponseEntity<>(responseData, HttpStatus.OK);
+    }
+
     @GetMapping("/get-random")
     public ResponseEntity<?> getRandom(@RequestParam(defaultValue = "") Integer top){
         ResponseData responseData = new ResponseData();
