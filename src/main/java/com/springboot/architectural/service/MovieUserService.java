@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface MovieUserService {
     Movie_UserDTO getById(String username);
+    Movie_UserDTO getByEmail(String email);
+
     List<Movie_UserDTO> getAll(String searchContent, String sortField, String typeSort);
     Movie_UserDTO add(Movie_UserDTO movieUserDTO);
     Movie_UserDTO update(Movie_UserDTO movieUserDTO);

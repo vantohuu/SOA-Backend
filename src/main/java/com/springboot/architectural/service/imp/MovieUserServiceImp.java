@@ -42,6 +42,11 @@ public class MovieUserServiceImp implements MovieUserService {
         Optional<Movie_User> entity = movieUserRepository.findById(username);
         return entity.map(MovieUserMapper.INSTANCE::movieUserToMovieUserDto).orElse(null);
     }
+    @Override
+    public Movie_UserDTO getByEmail(String email) {
+        Optional<Movie_User> entity = movieUserRepository.findByEmail(email);
+        return entity.map(MovieUserMapper.INSTANCE::movieUserToMovieUserDto).orElse(null);
+    }
 
     @Override
     public List<Movie_UserDTO> getAll(String searchContent,String sortField, String typeSort) {

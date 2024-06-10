@@ -86,6 +86,21 @@ public class MovieUserController {
 
         return new ResponseEntity<>(responseData, HttpStatus.OK);
     }
+    @GetMapping("/get-by-email")
+    public ResponseEntity<?> GetUSerByEmail(@RequestParam String email){
+        ResponseData responseData = new ResponseData();
+        if (movieUserService.getByEmail(email) == null)
+        {
+            responseData.setSuccess(false);
+            responseData.setDesc("Get failed");
+
+            return new ResponseEntity<>(responseData, HttpStatus.NOT_FOUND);
+        }
+        responseData.setData(movieUserService.getByEmail(email));
+        responseData.setDesc("Get  successfully");
+
+        return new ResponseEntity<>(responseData, HttpStatus.OK);
+    }
 
     @PostMapping("/upload")
     public ResponseEntity<?> deleteRoom(@RequestParam(name = "fileUpload")MultipartFile multipartFile, @RequestParam(name= "username")String username){
