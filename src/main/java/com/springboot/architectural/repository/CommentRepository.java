@@ -1,3 +1,4 @@
+
 package com.springboot.architectural.repository;
 
 import com.springboot.architectural.entity.Comment;
@@ -8,8 +9,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
+
 public interface CommentRepository extends JpaRepository<Comment, Integer> {
     @Query("SELECT comment FROM Comment comment " +
             "WHERE comment.comment LIKE %?1% and comment.movie.movieId = ?2 ")
     public Page<Comment> paginationAndSortingByMovie(String searchContent, Integer movieId, PageRequest pageRequest);
+
+    List<Comment> findAllByMovie(Movie movie);
 }

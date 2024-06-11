@@ -49,7 +49,12 @@ public class CommentServiceImp implements CommentService {
         if (movie.isEmpty() || movieUser.isEmpty()) return null;
         entity.setMovie(movie.get());
         entity.setMovieUser(movieUser.get());
-        return  CommentMapper.INSTANCE.commentToCommentDto(commentRepository.save(entity));
+        Comment comment = commentRepository.save(entity);
+        List<Comment> commentList = commentRepository.findAllByMovie(movie.get());
+        float star = ((commentList.size() - 1) * movie.get().getStar() + comment.getValue()) / commentList.size();
+        movie.get().setStar(star);
+        movieRepository.save(movie.get());
+        return  CommentMapper.INSTANCE.commentToCommentDto(comment);
     }
 
     @Override
@@ -84,3 +89,6 @@ public class CommentServiceImp implements CommentService {
         return false;
     }
 }
+
+
+
