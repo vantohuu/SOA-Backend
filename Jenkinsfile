@@ -1,6 +1,6 @@
 pipeline {
   environment {
-    dockerimagename = "huu2412002/soa-backend"
+    dockerimagename = "huu2412002/soa-backend:v01"
     dockerImage = ""
   }
   agent any
@@ -20,8 +20,9 @@ pipeline {
     stage('Deploying soa-backend container to Kubernetes') {
       steps {
         script {
-          kubernetesDeploy(configs: "pod.yaml")
-        }
+              sh '''
+                sudo kubectl apply -f pod.yaml --namespace ingress-nginx
+                '''        }
       }
     }
   }
