@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: soa-main
+  labels:
+    app: soa-main
+spec:
+  containers:
+  - name: soa-main
+    image: huu2412002/soa-backend
+    resources:
+      limits:
+        memory: "1024Mi"
+        cpu: "1000m"
+    ports:
+      - containerPort: 8080
+  - name: redis
+    image: redis
+    resources:
+      limits:
+        memory: "300Mi"
+        cpu: "200m"
+    ports:
+      - containerPort: 6379
