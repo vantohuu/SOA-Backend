@@ -21,7 +21,7 @@ pipeline {
       steps {
         script {
               sh '''
-                sudo kubectl apply -f pod.yaml --namespace ingress-nginx
+                kubectl apply -f pod.yaml --namespace ingress-nginx
                 '''        }
       }
     }
