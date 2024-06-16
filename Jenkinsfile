@@ -17,18 +17,6 @@ pipeline {
         }
       }
     }
-    stage('Pushing Image') {
-      environment {
-          registryCredential = 'dockerhub-credentials'
-           }
-      steps{
-        script {
-          docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
-            dockerImage.push("latest")
-          }
-        }
-      }
-    }
     stage('Deploying soa-backend container to Kubernetes') {
       steps {
         script {
