@@ -7,6 +7,7 @@ pipeline {
   stages {
     stage('Checkout Source') {
       steps {
+        cleanWs()
         git 'https://github.com/vantohuu/SOA-Backend.git'
       }
     }
