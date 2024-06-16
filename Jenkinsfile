@@ -20,7 +20,7 @@ pipeline {
     stage('Deploying soa-backend container to Kubernetes') {
       steps {
         script {
-          kubernetesDeploy(configs: "pod.yaml", "hpa.yaml","service.yaml")
+          kubernetesDeploy(configs: "pod.yaml")
         }
       }
     }
