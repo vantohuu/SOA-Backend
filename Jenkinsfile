@@ -18,12 +18,6 @@ pipeline {
         }
       }
     }
-    stage('Deploying soa-backend container to Kubernetes') {
-      steps {
-        script {
-                bat 'kubectl version'
-             }
-      }
-    }
+
   }
 }
