@@ -21,9 +21,8 @@ pipeline {
     stage('Deploying soa-backend container to Kubernetes') {
       steps {
         script {
-              sh '''
-                kubectl apply -f pod.yaml --namespace ingress-nginx
-                '''        }
+                  kubernetesDeploy(configs: "pod.yaml")
+                }
       }
     }
   }
