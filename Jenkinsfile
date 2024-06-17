@@ -21,7 +21,7 @@ pipeline {
     stage('Deploying soa-backend container to Kubernetes') {
       steps {
         script {
-                bat 'kubectl apply -f pod.yaml --validate=false --namespace ingress-nginx'
+                bat 'kubectl version'
              }
       }
     }
