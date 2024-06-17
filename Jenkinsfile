@@ -21,8 +21,8 @@ pipeline {
     stage('Deploying soa-backend container to Kubernetes') {
       steps {
         script {
-                  kubernetesDeploy(configs: "pod.yaml")
-                }
+                sh 'kubectl apply -f pod.yaml'
+             }
       }
     }
   }
