@@ -18,13 +18,7 @@ pipeline {
         }
       }
     }
-    stage('Deploying React.js container to Kubernetes') {
-          steps {
-            script {
-              bat 'kubectl get nodes'
-            }
-          }
-        }
+
 
   }
 }
