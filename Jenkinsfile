@@ -21,7 +21,7 @@ pipeline {
     stage('Deploying React.js container to Kubernetes') {
           steps {
             script {
-              bat 'kubectl config get-contexts'
+              bat 'kubectl get namespace'
             }
           }
         }
