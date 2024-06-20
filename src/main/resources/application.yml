@@ -2,7 +2,7 @@ cloud:
   aws:
     credentials:
       access-key: sadsadádád
-      secret-key: sdsad123213
+      secret-key: sdsad123
     region:
       static: us-east-1
     stack:
